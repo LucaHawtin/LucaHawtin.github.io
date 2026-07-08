@@ -66,7 +66,7 @@ nav a:hover{
 <p>Morbi viverra purus at erat luctus, ut lobortis felis pellentesque.</p>
 <img src="tramp.jpg" alt="Landscape"></section>
 </div>
-<div class="cta"><h2 style="color:#90caf9;margin-bottom:15px">See what I've been working on</h2><a href="portfolio.html">View My Portfolio</a></div>
+<div class="cta"><h2 style="color:#90caf9;margin-bottom:15px">See what I've been working on</h2><a href="Portfolio">View My Portfolio</a></div>
 </div>
 <script>
 const navbar = document.getElementById("navbar");
