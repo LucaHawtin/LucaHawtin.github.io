@@ -47,9 +47,9 @@ nav a:hover{
 </style></head>
 <body>
 <nav id="navbar">
-    <a href="index.html" style="color:#90caf9;">Home</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="contact.html">Contact</a>
+    <a href="Home" style="color:#90caf9;">Home</a>
+    <a href="Portfolio">Portfolio</a>
+    <a href="Contact">Contact</a>
     <a href="Luca_Hawtin_Resume.pdf" download="Luca_Hawtin_Resume.pdf" target="_blank">Resume</a>
 </nav>
 <header class="hero"><div><h1>Luca Hawtin</h1><p>Mechanical Engineering Student | University of Canterbury</p></div></header>
