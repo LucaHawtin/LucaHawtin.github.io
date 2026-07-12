@@ -1,62 +1,72 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Luca Hawtin | Home</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{font-family:Segoe UI,Tahoma,sans-serif;background:#121212;color:#e0e0e0;line-height:1.7}
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 20px 40px;
-    background: rgba(0,0,0,0);
-    backdrop-filter: blur(0px);
-    border-bottom: 1px solid rgba(255,255,255,0);
-    transition:
-        background-color 0.15s linear,
-        backdrop-filter 0.15s linear,
-        border-color 0.15s linear;
-    z-index: 1000;
-}
-nav a{
-    text-decoration:none;
-    color:#ddd;
-    margin-left:30px;
-    font-weight:600;
-    transition:color .25s;
-}
-
-nav a:hover{
-    color:#90caf9;
-}
-.hero{height:92vh;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.65)),url('roadbike.jpg') center/cover;display:flex;align-items:center;justify-content:center;text-align:center}
-.hero h1{font-size:4rem;color:#fff}.hero p{font-size:1.3rem;color:#ddd}
-.container{max-width:1100px;margin:auto;padding:70px 24px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;margin-bottom:50px}
-.stat,.card{background:#1e1e1e;border:1px solid #333;border-radius:10px;padding:24px}
-.stat h3{color:#90caf9;font-size:2rem}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
-.card h2{color:#90caf9;margin-bottom:18px}.card p{margin-bottom:18px;color:#ccc}
-.card img{width:100%;border-radius:8px;margin-top:18px}
-.cta{text-align:center;padding:60px 0}.cta a{display:inline-block;background:#1976d2;color:#fff;text-decoration:none;padding:14px 28px;border-radius:8px}
-@media(max-width:800px){.grid{grid-template-columns:1fr}.hero h1{font-size:2.8rem}nav{padding:16px;flex-wrap:wrap}}
-</style></head>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Luca Hawtin</title>
+<meta name="description" content="Get in touch with Luca Hawtin, mechanical engineer.">
+<link rel="stylesheet" href="css/style.css">
+</head>
 <body>
-<nav id="navbar">
-    <a href="index.html">Home</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="contact.html" style="color:#90caf9;">Contact</a>
-    <a href="Luca_Hawtin_Resume.pdf" download="Luca_Hawtin_Resume.pdf" target="_blank">Resume</a>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Luca Hawtin</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html" aria-current="page">Contact</a></li>
+      <li><a class="pill-btn pill-btn--primary" href="assets/resume/Luca_Hawtin_Resume.pdf" download="luca_hawtin_resume.pdf" target="_blank">Résumé</a></li>
+    </ul>
+  </div>
 </nav>
-<div class='container'><div class='card'>
-    <h1>Contact</h1>
-            <p>I am currently based in Christchurch and actively seeking summer engineering internship opportunities.</p>
-            <br>
-            <p class="contact-links">
-                <a href="mailto:LucaHawtin@gmail.com">LucaHawtin@gmail.com</a>
-                <a href="https://www.linkedin.com/in/luca-hawtin-944684357" target="_blank">LinkedIn Profile</a>
-</div></div></body></html>
+
+<header class="hero" style="padding-bottom: 2rem;">
+  <span class="eyebrow">Get in Touch</span>
+  <h1 style="font-size: clamp(2.4rem, 6vw, 3.8rem);">Let's talk</h1>
+  <p class="lede">
+    Please feel free to reach out directly through any of the contact methods listed here. I am always happy to connect and discuss any of my projects in more depth, or explore exciting new professional opportunities.
+  </p>
+  <div class="contact-methods">
+    <a class="pill-btn pill-btn--ghost" href="mailto:lucahawtin@email.com">Email</a>
+    <a class="pill-btn pill-btn--ghost" href="https://www.linkedin.com/in/luca-hawtin-944684357" target="_blank" rel="noopener">LinkedIn</a>
+    <span class="pill-btn pill-btn--ghost" style="cursor:default;">Christchurch, New Zealand</span>
+  </div>
+</header>
+
+
+<!-- Work out how to make form work later -->
+<!-- <section class="section reveal">
+  <div class="section-inner contact-grid">
+    <form class="contact-form" action="mailto:lucahawtin@email.com" method="post" enctype="text/plain">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit" class="pill-btn pill-btn--primary pill-btn--lg">Send Message</button>
+    </form>
+  </div>
+</section> -->
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+    <a href="assets/resume/Luca_Hawtin_Resume.pdf" download="luca_hawtin_resume.pdf" target="_blank">Résumé</a>
+  </div>
+  <p>&copy; 2026 Luca Hawtin. Built with plain HTML, CSS, and JS.</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
