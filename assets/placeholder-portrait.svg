@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 440">
+  <rect width="360" height="440" fill="#1c1c1e"/>
+  <circle cx="180" cy="170" r="60" fill="none" stroke="#48484a" stroke-width="2"/>
+  <path d="M70,380 C70,290 290,290 290,380" fill="none" stroke="#48484a" stroke-width="2"/>
+  <text x="180" y="420" font-family="-apple-system, sans-serif" font-size="13" fill="#86868b" text-anchor="middle" letter-spacing="0.5">Replace — portrait photo</text>
+</svg>

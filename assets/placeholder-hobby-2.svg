@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300">
+  <rect width="480" height="300" fill="#1c1c1e"/>
+  <g stroke="#2997ff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="90,220 190,110 240,170 290,90 400,220"/>
+    <circle cx="290" cy="70" r="16"/>
+  </g>
+  <text x="240" y="270" font-family="-apple-system, sans-serif" font-size="13" fill="#86868b" text-anchor="middle" letter-spacing="0.5">Replace — hobby photo</text>
+</svg>

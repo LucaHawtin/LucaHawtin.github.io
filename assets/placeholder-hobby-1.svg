@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300">
+  <rect width="480" height="300" fill="#1c1c1e"/>
+  <g stroke="#2997ff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="150" cy="210" r="42"/>
+    <circle cx="340" cy="210" r="42"/>
+    <path d="M150,210 L230,150 L300,150 L340,210"/>
+    <path d="M230,150 L210,110 L260,110"/>
+    <path d="M300,150 L320,120"/>
+  </g>
+  <text x="240" y="270" font-family="-apple-system, sans-serif" font-size="13" fill="#86868b" text-anchor="middle" letter-spacing="0.5">Replace — hobby photo</text>
+</svg>

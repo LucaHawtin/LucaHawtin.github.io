@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#1c1c1e"/>
+  <g>
+    <rect x="150" y="60" width="100" height="130" fill="#2c2c2e" stroke="#2997ff" stroke-width="2"/>
+    <polygon points="222,60 250,88 222,88" fill="#2997ff"/>
+    <line x1="165" y1="105" x2="235" y2="105" stroke="#2997ff" stroke-width="2"/>
+    <line x1="165" y1="120" x2="235" y2="120" stroke="#2997ff" stroke-width="2"/>
+    <line x1="165" y1="135" x2="215" y2="135" stroke="#2997ff" stroke-width="2"/>
+  </g>
+  <text x="200" y="270" font-family="-apple-system, sans-serif" font-size="13" fill="#86868b" text-anchor="middle" letter-spacing="0.5">Replace — project PDF</text>
+</svg>

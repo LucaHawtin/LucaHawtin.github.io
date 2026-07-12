@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#000000"/>
+  <circle cx="200" cy="140" r="42" fill="none" stroke="#2997ff" stroke-width="2"/>
+  <polygon points="188,120 188,160 224,140" fill="#2997ff"/>
+  <text x="200" y="270" font-family="-apple-system, sans-serif" font-size="13" fill="#86868b" text-anchor="middle" letter-spacing="0.5">Replace — project video</text>
+</svg>
