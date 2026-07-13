@@ -89,14 +89,28 @@ function initLightbox() {
       mediaHost.appendChild(iframe);
     } else if (type === 'youtube') {
       const iframe = document.createElement('iframe');
-      // Upgrade to privacy-enhanced domain dynamically
-      const secureSrc = src.replace('www.youtube.com', 'www.youtube-nocookie.com');
-      iframe.src = secureSrc + '?autoplay=1'; 
+      
+      // 1. Extract the 11-character video ID from ANY YouTube link format
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = src.match(regExp);
+      const videoId = (match && match[2].length === 11) ? match[2] : null;
+      
+      if (videoId) {
+        // 2. Build the exact privacy-safe embed link YouTube demands
+        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
+      } else {
+        // Fallback just in case the link was already an embed layout
+        iframe.src = src + '?autoplay=1';
+      }
+      
       iframe.title = caption || 'YouTube video player';
       iframe.setAttribute('frameborder', '0');
+      
+      // 3. Keep the security clearances active
       iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
       iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
       iframe.setAttribute('allowfullscreen', '');
+      
       mediaHost.appendChild(iframe);
     }
 
