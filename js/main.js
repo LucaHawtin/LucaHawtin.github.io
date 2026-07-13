@@ -89,15 +89,17 @@ function initLightbox() {
       mediaHost.appendChild(iframe);
     } else if (type === 'youtube') {
       const iframe = document.createElement('iframe');
-      iframe.src = src + '?autoplay=1'; 
+      // Upgrade to privacy-enhanced domain dynamically
+      const secureSrc = src.replace('www.youtube.com', 'www.youtube-nocookie.com');
+      iframe.src = secureSrc + '?autoplay=1'; 
       iframe.title = caption || 'YouTube video player';
       iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
       iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-      iframe.setAttribute('allowfullscreen', 'true');
+      iframe.setAttribute('allowfullscreen', '');
       mediaHost.appendChild(iframe);
     }
 
-    // --- These were the missing lines ---
     captionEl.textContent = caption;
     lightbox.classList.add('is-open');
     closeBtn.focus();
