@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Works on any page that includes elements with class "gallery-item" and a
 // matching <div class="lightbox" id="lightbox"> ... </div> markup block.
 // Each gallery-item button carries data attributes:
-//   data-type    = "image" | "video" | "pdf"
+//   data-type    = "image" | "video" | "pdf" | "youtube"
 //   data-src     = path to the full-size asset
 //   data-caption = text shown under the enlarged media
 // ---------------------------------------------------------------------------
@@ -87,8 +87,17 @@ function initLightbox() {
       iframe.src = src;
       iframe.title = caption || 'PDF preview';
       mediaHost.appendChild(iframe);
+    } else if (type === 'youtube') {
+      const iframe = document.createElement('iframe');
+      iframe.src = src + '?autoplay=1'; 
+      iframe.title = caption || 'YouTube video player';
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', 'true');
+      mediaHost.appendChild(iframe);
     }
 
+    // --- These were the missing lines ---
     captionEl.textContent = caption;
     lightbox.classList.add('is-open');
     closeBtn.focus();
