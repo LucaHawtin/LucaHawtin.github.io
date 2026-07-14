@@ -593,23 +593,33 @@ button { font-family: inherit; }
   grid-row: span 4;
 }
 
-@media (max-width:900px){
-
-.gallery{
-    grid-template-columns:repeat(6,1fr);
+.gallery-item.wide-large {
+  grid-column: span 8; /* Width of wide */
+  grid-row: span 5;    /* Height of large */
 }
 
-.gallery-item.small,
-.gallery-item.medium,
-.gallery-item.large,
-.gallery-item.tall,
-.gallery-item.wide{
-
-    grid-column:span 6;
-    grid-row:span 4;
+.gallery-item.medium-small {
+  grid-column: span 4; /* Width of medium */
+  grid-row: span 3;    /* Height of small */
 }
 
+@media (max-width:900px) {
+  .gallery {
+    grid-template-columns: repeat(6,1fr);
+  }
+
+  .gallery-item.small,
+  .gallery-item.medium,
+  .gallery-item.large,
+  .gallery-item.tall,
+  .gallery-item.wide,
+  .gallery-item.wide-large,
+  .gallery-item.medium-small{ /* Added here */
+    grid-column: span 6;
+    grid-row: span 4;
+  }
 }
+
 
 .gallery-item[data-type="video"]::after{
 
