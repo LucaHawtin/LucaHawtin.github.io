@@ -603,7 +603,7 @@ button { font-family: inherit; }
   grid-row: span 3;    /* Height of small */
 }
 
-.galley-item.skinny-tall {
+.gallery-item.skinny-tall {
   grid-column: span 4; /* Half the width of a wide-large */
   grid-row: span 5;    /* Height of large */
 }
