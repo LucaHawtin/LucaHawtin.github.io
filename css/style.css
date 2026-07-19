@@ -54,6 +54,17 @@ button { font-family: inherit; }
 
 ::selection { background: var(--accent); color: #fff; }
 
+/* ==========================================================================
+   STAT STRIP
+   ========================================================================== */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  text-align: center;
+  margin-top: 5rem;       /* Increased from 4rem to push it away from the bio */
+  margin-bottom: 5rem;    /* NEW: Pushes the coursework head down */
+}
 
 /* ==========================================================================
    COURSEWORK TICKER
@@ -103,7 +114,7 @@ button { font-family: inherit; }
 
 @keyframes ticker-scroll {
   from { transform: translateX(0); }
-  to { transform: translateX(-20%); }
+  to { transform: translateX(-10%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
