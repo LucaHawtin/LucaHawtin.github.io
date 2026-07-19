@@ -11,6 +11,30 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+const track = document.getElementById('interestCarousel');
+const prevBtn = document.getElementById('carouselPrev');
+const nextBtn = document.getElementById('carouselNext');
+
+if (track && prevBtn && nextBtn) {
+  const scrollAmount = () => track.querySelector('.interest-card').offsetWidth + 24; // card width + gap
+
+  prevBtn.addEventListener('click', () => {
+    track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+  });
+
+  nextBtn.addEventListener('click', () => {
+    track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+  });
+
+  const updateButtons = () => {
+    prevBtn.disabled = track.scrollLeft <= 4;
+    nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+  };
+
+  track.addEventListener('scroll', updateButtons);
+  updateButtons();
+}
+  
   // -------------------------------------------------------------------------
   // Mobile nav toggle
   // -------------------------------------------------------------------------
