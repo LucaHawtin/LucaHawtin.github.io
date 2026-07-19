@@ -107,41 +107,48 @@
 
 <section class="section section--alt reveal">
   <div class="section-inner">
-    <div class="section-head" style="margin-bottom: 4rem;">
+    <div class="section-head" style="margin-bottom: 3rem;">
       <span class="eyebrow">Beyond Engineering</span>
       <h2>Interests & Activities</h2>
       <p>My other interests outside of technical work.</p>
     </div>
 
-    <div class="card-grid">
-      <div class="hobby-card">
-        <div class="hobby-photo-frame">
-          <img src="assets/roadbike.jpg" alt="Southern Tour Cycling Race">
+    <div class="carousel-wrap">
+      <div class="interest-carousel" id="interestCarousel">
+
+        <div class="interest-card">
+          <div class="interest-photo">
+            <img src="assets/roadbike.jpg" alt="Southern Tour Cycling Race">
+          </div>
+          <p class="interest-caption">
+            <strong>Cycling.</strong> Competitive road cycling since 2018 — I founded the cycling team at Shirley Boys' High School and grew it to nearly twenty riders by my final year, winning the overall individual award for Christchurch Schools Cycling in 2023.
+          </p>
         </div>
-        <div class="hobby-content">
-          <h3>Cycling</h3>
-          <p>I have been competitively road cycling since 2018, my passion for the sport led me to found the cycling team at Shirley Boys' High School, growing the team to have nearly twenty riders by my final year. I won the overall individual award for Christchurch Schools Cycling in 2023, but since then my focus has shifted toward high-endurance mountain biking and multi-day backcountry adventures.</p>
+
+        <div class="interest-card">
+          <div class="interest-photo">
+            <img src="assets/skitour.jpg" alt="Ski Touring in the Mountains">
+          </div>
+          <p class="interest-caption">
+            <strong>Tramping.</strong> I spend much of my free time exploring New Zealand's backcountry across all seasons, from multi-day alpine crossings and ski touring to winter camping in remote, rugged terrain.
+          </p>
         </div>
-      </div>
-      <div class="hobby-card">
-        <div class="hobby-photo-frame">
-          <img src="assets/skitour.jpg" alt="Ski Touring in the Mountains">
+
+        <div class="interest-card">
+          <div class="interest-photo">
+            <img src="assets/adventurerace.jpg" alt="Adventure racing photo">
+          </div>
+          <p class="interest-caption">
+            <strong>Endurance sports.</strong> I thrive on multi-sport events and adventure racing, combining road and mountain biking with lead climbing and technical navigation — with the Coast to Coast and an Ironman as long-term goals.
+          </p>
         </div>
-        <div class="hobby-content">
-          <h3>Tramping</h3>
-          <p>An avid tramper with an appetite for challenging terrain, I spend much of my free time exploring New Zealand’s backcountry across all seasons. From multi-day alpine crossings and ski touring to winter camping, I enjoy the logistics, self-reliance, and physical endurance required to navigate remote routes and rugged peaks.</p>
-        </div>
-      </div>
-      <div class="hobby-card">
-        <div class="hobby-photo-frame">
-          <img src="assets/adventurerace.jpg" alt="Adventure racing photo">
-        </div>
-        <div class="hobby-content">
-          <h3>Other Endurance Sports</h3>
-          <p>Beyond traditional routes, I thrive on the varied challenges of multi-sport events and adventure racing. This passion brings together my endurance base in road cycling and long-distance mountain biking with outdoor lead climbing and technical navigation, demanding both physical versatility and sharp problem-solving in dynamic environments. Looking ahead, I would love to achieve the ultimate goal of tackling iconic endurance benchmarks like the Coast to Coast and an Ironman.</p>
-        </div>
+
       </div>
 
+      <div class="carousel-nav">
+        <button class="carousel-btn" id="carouselPrev" aria-label="Previous">&#8249;</button>
+        <button class="carousel-btn" id="carouselNext" aria-label="Next">&#8250;</button>
+      </div>
     </div>
   </div>
 </section>
