@@ -55,6 +55,55 @@ button { font-family: inherit; }
 ::selection { background: var(--accent); color: #fff; }
 
 /* ==========================================================================
+   SUBJECTS / COURSEWORK — compact list
+   ========================================================================== */
+.subjects-section {
+  padding: 3rem 1.5rem;
+}
+
+.subjects-head {
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+
+.subjects-head h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.subjects-head p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+.subject-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0;
+  margin: 0;
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.subject-tags li {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  border: 1px solid var(--divider);
+  border-radius: 999px;
+  padding: 0.4rem 0.95rem;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.subject-tags li:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+/* ==========================================================================
    INTEREST CAROUSEL (Apple-style)
    ========================================================================== */
 .carousel-wrap { position: relative; }
