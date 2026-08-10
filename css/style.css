@@ -571,188 +571,312 @@ button { font-family: inherit; }
   padding: 0.35rem 0.85rem;
 }
 
-/* --- gallery --- */
-.gallery-label {
-  display: block;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
-}
-
-/* ========================================================================== 
-   GALLERY GRID
+/* ==========================================================================
+   GALLERY — edge-to-edge masonry wall
    ========================================================================== */
-
 .gallery-label {
   display: block;
   font-size: 0.85rem;
   color: var(--text-secondary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
 }
 
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 70px;
-  gap: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gallery-row {
+  display: flex;
+  gap: 6px;
 }
 
 .gallery-item {
   position: relative;
-  overflow: hidden;
+  display: block;
   border: none;
-  border-radius: 20px;
-  background: var(--bg-card);
-  cursor: pointer;
-  transition: transform .25s ease;
+  background: none;
   padding: 0;
-  text-align: left;
+  margin: 0;
+  cursor: pointer;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-.gallery-item:hover {
-  transform: translateY(-5px);
+.thumb-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-card);
 }
 
 .gallery-item img {
+  display: block;
   width: 100%;
+  height: auto;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.4s ease;
+}
+
+/* once JS has measured real aspect ratios and sized each row, the image
+   fills its box exactly rather than keeping its own intrinsic height */
+.gallery.is-justified .gallery-item img {
   height: 100%;
   object-fit: cover;
 }
 
-.thumb-frame {
-  width: 100%;
-  height: 100%;
-}
-
-.caption {
+/* quiet dim-and-lift on hover instead of a caption */
+.thumb-frame::before {
+  content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 1rem;
-  background: linear-gradient(
-    transparent,
-    rgba(0,0,0,.75)
-  );
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.cap-text {
-  font-size: .9rem;
-  color: white;
+.gallery-item:hover .thumb-frame::before {
+  background: rgba(0, 0, 0, 0.06);
 }
 
-.cap-type {
-  font-size: .7rem;
-  color: var(--accent);
-  text-transform: uppercase;
+.gallery-item:hover img {
+  transform: scale(1.03);
 }
 
-/* Different card sizes */
-
-.gallery-item.small{
-  grid-column: span 3;
-  grid-row: span 3;
-}
-
-.gallery-item.medium{
-  grid-column: span 4;
-  grid-row: span 4;
-}
-
-.gallery-item.large{
-  grid-column: span 6;
-  grid-row: span 5;
-}
-
-.gallery-item.tall{
-  grid-column: span 4;
-  grid-row: span 6;
-}
-
-.gallery-item.wide{
-  grid-column: span 8;
-  grid-row: span 4;
-}
-
-.gallery-item.wide-large {
-  grid-column: span 8; /* Width of wide */
-  grid-row: span 5;    /* Height of large */
-}
-
-.gallery-item.medium-small {
-  grid-column: span 4; /* Width of medium */
-  grid-row: span 3;    /* Height of small */
-}
-
-.gallery-item.skinny-tall {
-  grid-column: span 4; /* Half the width of a wide-large */
-  grid-row: span 5;    /* Height of large */
-}
-
-@media (max-width:900px) {
-  .gallery {
-    grid-template-columns: repeat(6,1fr);
-  }
-
-  .gallery-item.small,
-  .gallery-item.medium,
-  .gallery-item.large,
-  .gallery-item.tall,
-  .gallery-item.wide,
-  .gallery-item.wide-large,
-  .gallery-item.medium-small,
-  .gallery-item.skinny-tall{ /* Added here */
-    grid-column: span 6;
-    grid-row: span 4;
-  }
-}
-
-
-/* 1. CRITICAL: The parent needs relative positioning so absolute centering works */
-.gallery-item {
-  position: relative; 
-}
-
-/* 2. Target both video and youtube types together */
-.gallery-item[data-type="video"]::after,
-.gallery-item[data-type="youtube"]::after {
-  content: "▶";
+/* video / youtube — a slim ring rather than a solid disc */
+.gallery-item[data-type="video"] .thumb-frame::after,
+.gallery-item[data-type="youtube"] .thumb-frame::after {
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 48px;
+  height: 48px;
   transform: translate(-50%, -50%);
-  
-  width: 70px;
-  height: 70px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
-  
-  /* Flexbox centers the "▶" inside the 70px circle */
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: transform 0.3s ease, background 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.gallery-item[data-type="video"]::after,
+.gallery-item[data-type="youtube"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 2px);
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 6px 0 6px 9px;
+  border-color: transparent transparent transparent #fff;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.gallery-item[data-type="video"]:hover .thumb-frame::after,
+.gallery-item[data-type="youtube"]:hover .thumb-frame::after {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: rgba(0, 0, 0, 0.34);
+}
+
+/* ==========================================================================
+   PROJECT OVERVIEW GRID (projects.html)
+   ========================================================================== */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--divider-soft);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.project-card:hover {
+  border-color: var(--divider);
+  transform: translateY(-4px);
+}
+
+.project-card .card-photo-frame {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.project-card .card-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.project-card:hover .card-photo-frame img {
+  transform: scale(1.045);
+}
+
+.project-card .card-content {
+  padding: 1.6rem 1.75rem 1.85rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.project-card .card-kind {
+  font-size: 0.72rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 500;
+  margin-bottom: 0.55rem;
+}
+
+.project-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.55rem;
+}
+
+.project-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.project-card .card-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0;
+  margin: 1.1rem 0 0;
+}
+
+.project-card .card-tags li {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  border: 1px solid var(--divider);
+  border-radius: 999px;
+  padding: 0.28rem 0.7rem;
+}
+
+.project-card .card-footer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--divider-soft);
+}
+
+.project-card .card-meta {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+}
+
+.project-card .card-arrow {
+  color: var(--accent);
+  font-size: 1.05rem;
+  transition: transform 0.2s ease;
+}
+
+.project-card:hover .card-arrow {
+  transform: translateX(3px);
+}
+
+.project-card--placeholder {
+  align-items: center;
   justify-content: center;
-  
-  /* Visual tweaks */
-  font-size: 1.6rem;
-  color: white;
-  backdrop-filter: blur(6px);
-  pointer-events: none; /* Allows clicks to pass through to the video below */
-  
-  /* Optional: Smooth transition for hover effects later */
-  transition: background 0.2s ease, transform 0.2s ease;
+  text-align: center;
+  padding: 2.5rem 1.75rem;
+  color: var(--text-tertiary);
+  border-style: dashed;
 }
 
-/* 3. Your existing PDF styles */
-.gallery-item[data-type="pdf"] {
-  background: #161616;
+.project-card--placeholder:hover {
+  transform: none;
+  border-color: var(--divider-soft);
 }
 
-.gallery-item[data-type="pdf"] img {
-  object-fit: contain;
-  padding: 2rem;
+.project-card--placeholder .card-kind { color: var(--text-tertiary); }
+
+/* ==========================================================================
+   PROJECT DETAIL HERO (individual project pages)
+   ========================================================================== */
+.project-hero {
+  padding: calc(52px + 4.5rem) 1.5rem 3rem;
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.project-hero .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.75rem;
+  transition: color 0.15s ease, gap 0.15s ease;
+}
+
+.project-hero .back-link:hover {
+  color: var(--text);
+  gap: 0.6em;
+}
+
+.project-hero .eyebrow {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.project-hero h1 {
+  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+.project-hero .tagline {
+  max-width: 56ch;
+  margin: 1.1rem auto 0;
+  font-size: 1.08rem;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   PROJECT PAGER (prev/next between detail pages)
+   ========================================================================== */
+.project-pager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4.5rem;
+  border-top: 1px solid var(--divider-soft);
+}
+
+@media (max-width: 560px) {
+  .project-pager { padding: 2.25rem 1.25rem 3.5rem; }
 }
 
 /* ==========================================================================
@@ -962,7 +1086,6 @@ button:focus-visible {
 }
 
 @media (max-width: 500px) {
-  .gallery-item { flex-basis: 240px; }
   .spec-grid { grid-template-columns: 1fr 1fr; }
   .card-grid { grid-template-columns: 1fr; }
 }
