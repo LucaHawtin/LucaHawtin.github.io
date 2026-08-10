@@ -45,7 +45,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initLightbox();
   initJustifiedGalleries();
+  initResumeModal();
 });
+
+// ---------------------------------------------------------------------------
+// Résumé download-confirmation modal
+// ---------------------------------------------------------------------------
+function initResumeModal() {
+  const modal = document.getElementById('resume-modal');
+  const openBtn = document.getElementById('resume-download-btn');
+  if (!modal || !openBtn) return;
+
+  const cancelBtn = document.getElementById('resume-modal-cancel');
+
+  const open = () => modal.classList.add('is-open');
+  const close = () => modal.classList.remove('is-open');
+
+  openBtn.addEventListener('click', open);
+  if (cancelBtn) cancelBtn.addEventListener('click', close);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) close();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
+  });
+}
 
 // ---------------------------------------------------------------------------
 // Justified gallery layout
