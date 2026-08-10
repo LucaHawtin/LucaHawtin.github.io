@@ -1087,5 +1087,5 @@ button:focus-visible {
 
 @media (max-width: 500px) {
   .spec-grid { grid-template-columns: 1fr 1fr; }
-  .card-grid { grid-template-columns: 1fr; }
+  .card-grid { grid-template-columns: 1fr ; }
 }
