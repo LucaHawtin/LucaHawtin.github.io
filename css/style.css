@@ -1260,6 +1260,7 @@ button:focus-visible {
   .resume-page-row {
     grid-template-columns: 1fr;
     gap: 0;
+     
   }
 
   .resume-rail {
