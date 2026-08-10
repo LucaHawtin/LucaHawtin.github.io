@@ -1089,3 +1089,199 @@ button:focus-visible {
   .spec-grid { grid-template-columns: 1fr 1fr; }
   .card-grid { grid-template-columns: 1fr; }
 }
+
+/* ==========================================================================
+   RESUME PAGE
+   ========================================================================== */
+.resume-hero {
+  padding: calc(52px + 4.5rem) 1.5rem 3rem;
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.resume-hero .eyebrow {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.resume-hero h1 {
+  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+.resume-hero .tagline {
+  max-width: 56ch;
+  margin: 1.1rem auto 0;
+  font-size: 1.08rem;
+  color: var(--text-secondary);
+}
+
+.resume-spread {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.resume-page-row {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr) 230px;
+  align-items: stretch;
+  gap: 2.5rem;
+  margin-bottom: 4rem;
+}
+
+.resume-page-row:last-child { margin-bottom: 0; }
+
+.resume-rail {
+  position: relative;
+}
+
+.resume-page-img {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
+
+.photo-pin {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  transform: translateY(-50%);
+}
+
+.photo-pin-frame {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--divider-soft);
+  background: var(--bg-card);
+  transition: border-color 0.25s ease;
+}
+
+.photo-pin-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.photo-pin:hover .photo-pin-frame { border-color: var(--divider); }
+.photo-pin:hover .photo-pin-frame img { transform: scale(1.04); }
+
+.photo-pin-caption {
+  display: block;
+  margin-top: 0.55rem;
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  line-height: 1.3;
+}
+
+.resume-rail--left .photo-pin-caption { text-align: right; }
+
+.photo-pin--placeholder .photo-pin-frame {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: dashed;
+  background: transparent;
+}
+
+.photo-pin--placeholder .placeholder-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  text-align: center;
+  padding: 0 0.75rem;
+}
+
+.resume-cta {
+  text-align: center;
+  padding: var(--section-pad) 1.5rem;
+}
+
+.resume-cta p {
+  color: var(--text-secondary);
+  margin-bottom: 1.75rem;
+}
+
+/* Confirm-to-download modal */
+.confirm-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 100;
+}
+
+.confirm-modal.is-open { display: flex; }
+
+.confirm-modal-box {
+  background: var(--bg-card);
+  border: 1px solid var(--divider-soft);
+  border-radius: 16px;
+  max-width: 420px;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+
+.confirm-modal-box h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.6rem;
+}
+
+.confirm-modal-box p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  margin-bottom: 1.6rem;
+}
+
+.confirm-modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .resume-page-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .resume-rail {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+    order: 2;
+  }
+
+  .resume-page-img { order: 1; }
+
+  .photo-pin {
+    position: static;
+    transform: none;
+    width: calc(50% - 0.625rem);
+  }
+
+  .resume-rail--left .photo-pin-caption { text-align: left; }
+}
+
+@media (max-width: 480px) {
+  .photo-pin { width: 100%; }
+}
+
