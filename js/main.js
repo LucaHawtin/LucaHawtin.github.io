@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLightbox();
   initJustifiedGalleries();
   initResumeModal();
+  initHashCentering();
 });
 
 // ---------------------------------------------------------------------------
@@ -225,12 +226,12 @@ function initLightbox() {
       mediaHost.appendChild(iframe);
     } else if (type === 'youtube') {
       const iframe = document.createElement('iframe');
-      
+
       // 1. Extract the 11-character video ID from ANY YouTube link format
       const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
       const match = src.match(regExp);
       const videoId = (match && match[2].length === 11) ? match[2] : null;
-      
+
       if (videoId) {
         // 2. Build the exact privacy-safe embed link YouTube demands
         iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
@@ -238,15 +239,15 @@ function initLightbox() {
         // Fallback just in case the link was already an embed layout
         iframe.src = src + '?autoplay=1';
       }
-      
+
       iframe.title = caption || 'YouTube video player';
       iframe.setAttribute('frameborder', '0');
-      
+
       // 3. Keep the security clearances active
       iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
       iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
       iframe.setAttribute('allowfullscreen', '');
-      
+
       mediaHost.appendChild(iframe);
     }
 
@@ -274,5 +275,103 @@ function initLightbox() {
     if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
       closeLightbox();
     }
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Center-scroll anchor targets — e.g. following a `#carbon-layup` link
+// lands the target in the vertical center of the screen, not jammed
+// under the fixed nav at the very top. When a target sits too close to
+// the top of the document to physically reach center (the browser can't
+// scroll past 0), a brief highlight flash marks it instead.
+// ---------------------------------------------------------------------------
+function scrollHashToCenter(hash, behavior) {
+  const id = decodeURIComponent((hash || '').replace('#', ''));
+  if (!id) return;
+  const target = document.getElementById(id);
+  if (!target) return;
+
+  // Work out the absolute document position the page would need to
+  // scroll to in order to put this target dead-center in the viewport.
+  const rect = target.getBoundingClientRect();
+  const rectTopAbsolute = rect.top + window.scrollY;
+  const idealScrollY = rectTopAbsolute - (window.innerHeight / 2 - rect.height / 2);
+
+  // If that ideal position is at or above the very top of the page (as
+  // it is for the first row of cards, right under the header), the
+  // browser can't scroll any further up to compensate — it'll just clamp
+  // to 0, which looks identical to the old "jump to top" behavior. In
+  // that case, skip the scroll entirely and rely on the flash alone.
+  if (idealScrollY > 0) {
+    target.scrollIntoView({ behavior, block: 'center', inline: 'nearest' });
+  }
+
+  // Give the target a brief highlight so it's obvious which item was
+  // linked to, whether or not any scrolling happened.
+  target.classList.remove('anchor-flash'); // restart if triggered twice
+  void target.offsetWidth; // force reflow so the animation replays
+  target.classList.add('anchor-flash');
+  target.addEventListener('animationend', () => {
+    target.classList.remove('anchor-flash');
+  }, { once: true });
+}
+
+function initHashCentering() {
+  function handleInitialHash(behavior) {
+    if (!window.location.hash) return;
+    window.scrollTo(0, 0);
+    scrollHashToCenter(window.location.hash, behavior);
+  }
+
+  if (window.location.hash) {
+    history.scrollRestoration = 'manual';
+    // Cancel the browser's own instant top-jump immediately; the real
+    // centering happens once we know the page has actually rendered
+    // (see the 'load' and 'pageshow' listeners below).
+    window.scrollTo(0, 0);
+  }
+
+  // Normal, fresh navigation to a page that already has a hash in the URL.
+  window.addEventListener('load', () => handleInitialHash('auto'));
+
+  // Fires on every visit, including when the browser restores the page
+  // from the back/forward cache (bfcache) instead of reloading it — which
+  // 'load' does NOT fire for. Without this, centering only ever works the
+  // first time a page is visited.
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      handleInitialHash('auto');
+    }
+  });
+
+  // Any hash link clicked while already on the page (in-page anchors).
+  document.querySelectorAll('a[href*="#"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      let url;
+      try {
+        url = new URL(link.getAttribute('href'), window.location.href);
+      } catch {
+        return;
+      }
+      const samePage = url.pathname === window.location.pathname;
+      if (samePage && url.hash) {
+        e.preventDefault();
+        if (url.hash === window.location.hash) {
+          // Hash is unchanged from the current URL (e.g. clicking the
+          // same link twice) — pushState wouldn't trigger anything new,
+          // so just re-run the scroll/flash directly.
+          scrollHashToCenter(url.hash, 'smooth');
+        } else {
+          history.pushState(null, '', url.hash);
+          scrollHashToCenter(url.hash, 'smooth');
+        }
+      }
+    });
+  });
+
+  // Catch-all for hash changes not caused by the click handler above,
+  // e.g. the browser's native back/forward navigation between hash states.
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash) scrollHashToCenter(window.location.hash, 'smooth');
   });
 }
