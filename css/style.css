@@ -320,7 +320,6 @@ button { font-family: inherit; }
    ========================================================================== */
 .section {
   padding: var(--section-pad) 1.5rem;
-  border-top: 1px solid var(--divider-soft);
 }
 
 .section--alt { background: var(--bg-alt); }
