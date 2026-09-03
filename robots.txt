@@ -1,0 +1,51 @@
+# robots.txt for lucahawtin.com
+# Goal: keep the portfolio/resume pages crawlable for recruiters and search
+# engines, while stopping the raw resume files/images and stale files from
+# being independently indexed, scraped into third-party databases, or pulled
+# into AI training sets.
+
+User-agent: *
+Allow: /
+
+# Don't let the raw resume assets get crawled/indexed on their own (e.g. via
+# Google Images, or third-party "resume database" scraper sites that harvest
+# public CVs). The resume.html page itself stays fully crawlable via "Allow: /"
+# above - this only affects the underlying files.
+Disallow: /assets/resume/pages/
+Disallow: /assets/resume/photos/
+Disallow: /assets/resume/luca_hawtin_resume_old.pdf
+
+# Optional: uncomment this if you'd rather the CURRENT resume PDF also not be
+# independently indexed/cached by search engines. It will still work fine for
+# anyone you send the direct link to - this only affects search-engine crawling.
+# Disallow: /assets/resume/Luca_Hawtin_Resume.pdf
+
+# Block crawlers used to scrape content for AI model training, or that fetch
+# pages on-demand for an AI tool, so your resume, photo, and project details
+# aren't ingested or surfaced by third-party AI systems without your knowledge.
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
