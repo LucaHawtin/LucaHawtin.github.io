@@ -57,7 +57,42 @@ document.addEventListener('DOMContentLoaded', () => {
   initResumeModal();
   initHashCentering();
   initContactForm();
+  initFooterYear();
+  initAnalyticsEvents();
 });
+
+// ---------------------------------------------------------------------------
+// Footer year — keeps the copyright year current without manual edits.
+// ---------------------------------------------------------------------------
+function initFooterYear() {
+  const currentYear = String(new Date().getFullYear());
+  document.querySelectorAll('.site-footer p').forEach((p) => {
+    p.innerHTML = p.innerHTML.replace(/\b(19|20)\d{2}\b/, currentYear);
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Analytics helper — safely sends a GA4 custom event. No-ops if gtag isn't
+// loaded (e.g. an ad blocker stripped it), so this never breaks the page.
+// ---------------------------------------------------------------------------
+function trackEvent(name, params) {
+  if (typeof gtag === 'function') {
+    gtag('event', name, params || {});
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Extra engagement events GA4 doesn't pick up automatically:
+// mailto: clicks aren't counted as "outbound clicks" by Enhanced Measurement
+// (they're not cross-origin http links), so they need an explicit event.
+// ---------------------------------------------------------------------------
+function initAnalyticsEvents() {
+  document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
+    link.addEventListener('click', () => {
+      trackEvent('contact_click', { method: 'email' });
+    });
+  });
+}
 
 // ---------------------------------------------------------------------------
 // Contact form — submits to Web3Forms (https://web3forms.com) via fetch, so
@@ -92,6 +127,7 @@ function initContactForm() {
         form.reset();
         statusEl.textContent = "Thanks — your message is on its way. I'll get back to you soon.";
         statusEl.classList.add('form-status--success');
+        trackEvent('generate_lead', { event_category: 'contact_form' });
       } else {
         throw new Error(result.message || 'Submission failed.');
       }
@@ -114,12 +150,21 @@ function initResumeModal() {
   if (!modal || !openBtn) return;
 
   const cancelBtn = document.getElementById('resume-modal-cancel');
+  const downloadLink = modal.querySelector('a[download]');
 
-  const open = () => modal.classList.add('is-open');
+  const open = () => {
+    modal.classList.add('is-open');
+    trackEvent('resume_modal_open');
+  };
   const close = () => modal.classList.remove('is-open');
 
   openBtn.addEventListener('click', open);
   if (cancelBtn) cancelBtn.addEventListener('click', close);
+  if (downloadLink) {
+    downloadLink.addEventListener('click', () => {
+      trackEvent('resume_download', { file_name: 'luca_hawtin_resume.pdf' });
+    });
+  }
 
   modal.addEventListener('click', (e) => {
     if (e.target === modal) close();

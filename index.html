@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://api.web3forms.com; img-src 'self' data: https://www.google-analytics.com; frame-src 'self' https://www.youtube-nocookie.com; style-src 'self' 'unsafe-inline'; font-src 'self'; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none';">
 <title>Luca Hawtin — Mechanical Engineering Student</title>
 <meta name="description" content="Portfolio of Luca Hawtin, mechanical engineer — projects, background, and contact information.">
 <link rel="canonical" href="https://lucahawtin.com/">
@@ -12,6 +13,9 @@
 <meta property="og:description" content="Portfolio of Luca Hawtin, mechanical engineer — projects, background, and contact information.">
 <meta property="og:url" content="https://lucahawtin.com/">
 <meta property="og:image" content="https://lucahawtin.com/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:site_name" content="Luca Hawtin">
 
 <meta name="twitter:card" content="summary_large_image">
@@ -37,17 +41,11 @@
 }
 </script>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=20260903">
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-04SLD2YV0Y"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-04SLD2YV0Y');
-</script>
+<script src="js/analytics.js?v=20260903"></script>
 
 <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
@@ -275,6 +273,6 @@
   <p>&copy; 2026 Luca Hawtin. Built with plain HTML, CSS, and JS.</p>
 </footer>
 
-<script src="js/main.js"></script>
+<script src="js/main.js?v=20260903b"></script>
 </body>
 </html>
