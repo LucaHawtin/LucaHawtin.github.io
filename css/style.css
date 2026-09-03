@@ -48,7 +48,7 @@ p { margin: 0; }
 
 a { color: inherit; text-decoration: none; }
 
-img, video { max-width: 100%; display: block; }
+img, video { max-width: 100%; height: auto; display: block; }
 
 button { font-family: inherit; }
 
@@ -1320,3 +1320,24 @@ button:focus-visible {
   .photo-pin { width: 110px; }
 }
 
+
+/* ==========================================================================
+   SKIP LINK (accessibility)
+   ========================================================================== */
+.skip-link {
+  position: absolute;
+  top: -3rem;
+  left: 0.5rem;
+  z-index: 2000;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.6rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 0.5rem;
+}

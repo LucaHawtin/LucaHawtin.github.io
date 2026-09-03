@@ -22,6 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const isOpen = links.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', String(isOpen));
     });
+
+    // Close the mobile menu once a link is chosen (e.g. a same-page anchor
+    // like "#carbon-layup"), so it doesn't stay open over the page.
+    links.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        links.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
   }
 
   // -------------------------------------------------------------------------

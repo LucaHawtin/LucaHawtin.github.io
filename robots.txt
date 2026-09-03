@@ -49,3 +49,5 @@ Disallow: /
 
 User-agent: ClaudeBot
 Disallow: /
+
+Sitemap: https://lucahawtin.com/sitemap.xml
