@@ -56,7 +56,54 @@ document.addEventListener('DOMContentLoaded', () => {
   initJustifiedGalleries();
   initResumeModal();
   initHashCentering();
+  initContactForm();
 });
+
+// ---------------------------------------------------------------------------
+// Contact form — submits to Web3Forms (https://web3forms.com) via fetch, so
+// the page never reloads. Free, no backend required: just paste your own
+// access key into the hidden "access_key" input in contact.html.
+// ---------------------------------------------------------------------------
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  const statusEl = document.getElementById('contact-form-status');
+  if (!form || !statusEl) return;
+
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    submitBtn.disabled = true;
+    const originalLabel = submitBtn.textContent;
+    submitBtn.textContent = 'Sending…';
+    statusEl.textContent = '';
+    statusEl.classList.remove('form-status--success', 'form-status--error');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+      });
+      const result = await response.json();
+
+      if (result.success) {
+        form.reset();
+        statusEl.textContent = "Thanks — your message is on its way. I'll get back to you soon.";
+        statusEl.classList.add('form-status--success');
+      } else {
+        throw new Error(result.message || 'Submission failed.');
+      }
+    } catch (err) {
+      statusEl.textContent = 'Sorry, something went wrong sending that — please email me directly at lucahawtin@gmail.com instead.';
+      statusEl.classList.add('form-status--error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+    }
+  });
+}
 
 // ---------------------------------------------------------------------------
 // Résumé download-confirmation modal

@@ -67,10 +67,16 @@
 </header>
 
 
-<!-- Work out how to make form work later -->
-<!-- <section class="section reveal">
+<section class="section reveal">
   <div class="section-inner contact-grid">
-    <form class="contact-form" action="mailto:lucahawtin@gmail.com" method="post" enctype="text/plain">
+    <form class="contact-form" id="contact-form">
+      <!-- Web3Forms: https://web3forms.com — free, no backend needed.
+           Replace the value below with your own access key. -->
+      <input type="hidden" name="access_key" value="ed0c432b-adc4-455a-8c7c-5fa524468976">
+      <input type="hidden" name="subject" value="New message from lucahawtin.com">
+      <input type="hidden" name="from_name" value="Luca Hawtin Website">
+      <input type="checkbox" name="botcheck" style="display: none;" tabindex="-1" autocomplete="off">
+
       <div>
         <label for="name">Name</label>
         <input type="text" id="name" name="name" required>
@@ -84,9 +90,10 @@
         <textarea id="message" name="message" required></textarea>
       </div>
       <button type="submit" class="pill-btn pill-btn--primary pill-btn--lg">Send Message</button>
+      <p class="form-status" id="contact-form-status" role="status" aria-live="polite"></p>
     </form>
   </div>
-</section> -->
+</section>
 
 <footer class="site-footer">
   <div class="footer-links">

@@ -1009,6 +1009,15 @@ button { font-family: inherit; }
   align-self: flex-start;
 }
 
+.form-status {
+  font-size: 0.9rem;
+  min-height: 1.2em;
+  margin: 0;
+}
+
+.form-status--success { color: #32d74b; }
+.form-status--error { color: #ff453a; }
+
 /* ==========================================================================
    FOOTER
    ========================================================================== */
