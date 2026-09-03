@@ -1350,3 +1350,39 @@ button:focus-visible {
 .skip-link:focus {
   top: 0.5rem;
 }
+
+
+/* ==========================================================================
+   PRINT STYLES
+   ========================================================================== */
+@media print {
+  .site-nav,
+  .site-footer,
+  .skip-link,
+  .resume-cta,
+  .resume-rail,
+  .nav-toggle,
+  .confirm-modal {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .resume-page-img {
+    box-shadow: none;
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+
+  .resume-page-row:not(:last-child) {
+    page-break-after: always;
+  }
+}
