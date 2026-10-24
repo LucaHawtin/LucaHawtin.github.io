@@ -688,6 +688,123 @@ button { font-family: inherit; }
 }
 
 /* ==========================================================================
+   REPORT — project pages written as one continuous report, with photos
+   floated into the text or set between paragraphs as wide shots, pairs
+   and trios.
+   ========================================================================== */
+.project-block--report { overflow-x: clip; }
+
+/* stats run the full width as one row above the report, tags beneath */
+.spec-grid--wide { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.tags--wide { margin: 1.5rem 0 clamp(4rem, 9vw, 7rem); }
+
+/* report article — one continuous write-up with photos set into the text */
+.report-article { display: flow-root; } /* contains the floated photos */
+
+.report-article p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: 1.4rem;
+}
+
+.inline-fig { margin: 0 0 1.5rem; }
+
+/* start a paragraph below a photo floated right, level with a photo floated left */
+.report-article .clear-right { clear: right; }
+
+.inline-fig .gallery-item {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.inline-fig .gallery-item img {
+  max-height: 440px;
+  object-fit: cover;
+}
+
+.inline-fig figcaption {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  margin-top: 0.6rem;
+  line-height: 1.45;
+}
+
+/* each floated photo clears the one before it, so two never squeeze the
+   text between them */
+.inline-fig--right {
+  float: right;
+  clear: both;
+  width: 48%;
+  margin: 0.4rem 0 1.5rem 2.25rem;
+}
+
+.inline-fig--left {
+  float: left;
+  clear: both;
+  width: 44%;
+  margin: 0.4rem 2.25rem 1.5rem 0;
+}
+
+.inline-fig--small { width: 34%; }
+
+.inline-fig--wide {
+  clear: both;
+  margin: 2.5rem 0;
+}
+
+/* full-width photos shrink to fit rather than being cropped, so whole
+   drawings stay visible */
+.inline-fig--wide .gallery-item {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.inline-fig--wide .gallery-item img {
+  width: auto;
+  max-width: 100%;
+  max-height: 560px;
+}
+
+.inline-fig--wide figcaption { text-align: center; }
+
+/* two photos side by side between paragraphs, the second set a little lower */
+.inline-pair {
+  clear: both;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  margin: 2.5rem 0;
+}
+
+.inline-pair .inline-fig { margin: 0; }
+.inline-pair .inline-fig:nth-child(2) { margin-top: 3rem; }
+
+/* three photos: wider first column, middle one set lower */
+.inline-pair--trio { grid-template-columns: 1.3fr 1fr 1fr; }
+
+@media (max-width: 700px) {
+  .inline-fig--left,
+  .inline-fig--right {
+    float: none;
+    width: 100%;
+    margin: 1.5rem 0;
+  }
+
+  .inline-pair { grid-template-columns: 1fr; }
+  .inline-pair .inline-fig:nth-child(2) { margin-top: 0; }
+}
+
+@media (max-width: 860px) {
+  .spec-grid--wide { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ==========================================================================
    PROJECT OVERVIEW GRID (projects.html)
    ========================================================================== */
 .project-grid {
@@ -889,15 +1006,16 @@ button { font-family: inherit; }
   align-items: center;
   justify-content: center;
   z-index: 100;
-  padding: 2rem;
+  padding: 2vh 2vw;
 }
 
 .lightbox.is-open { display: flex; }
 
+/* shrinks to fit the photo, which itself fills as much of the screen as
+   it can (up to 96% wide / tall, leaving room for the caption) */
 .lightbox-inner {
-  max-width: min(90vw, 920px);
-  max-height: 85vh;
-  width: 100%;
+  max-width: 96vw;
+  max-height: 96vh;
   background: var(--bg-alt);
   border-radius: 18px;
   overflow: hidden;
@@ -914,15 +1032,67 @@ button { font-family: inherit; }
   align-items: center;
   justify-content: center;
   background: #000;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .lightbox-media img,
-.lightbox-media video { max-width: 100%; max-height: 78vh; }
+.lightbox-media video {
+  display: block;
+  max-width: 96vw;
+  max-height: calc(96vh - 5rem);
+}
 
-.lightbox-media iframe { width: 100%; height: 78vh; border: none; }
+/* zoomable image: see attachZoom() in main.js */
+.lightbox-media img {
+  cursor: zoom-in;
+  touch-action: none;
+  user-select: none;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.lightbox-media img.is-zoomed { cursor: grab; }
+.lightbox-media img.is-dragging { cursor: grabbing; }
+
+/* YouTube embeds have no size of their own, so give them the largest
+   16:9 box that fits */
+.lightbox-media iframe {
+  width: min(96vw, (96vh - 5rem) * 16 / 9);
+  aspect-ratio: 16 / 9;
+  border: none;
+}
+
+.lightbox-zoom {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2;
+  display: none;
+  gap: 0.35rem;
+}
+
+.lightbox.is-image .lightbox-zoom { display: flex; }
+
+.lightbox-zoom button {
+  min-width: 2.1rem;
+  height: 2.1rem;
+  padding: 0 0.6rem;
+  border: none;
+  border-radius: 999px;
+  background: rgba(28, 28, 30, 0.8);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+.lightbox-zoom button:hover { background: rgba(58, 58, 60, 0.9); }
 
 .lightbox-caption {
+  width: 0;
+  min-width: 100%; /* wraps to the photo's width instead of widening the box */
+  box-sizing: border-box;
   font-size: 0.88rem;
   color: var(--text-secondary);
   padding: 0.9rem 1.2rem;
@@ -934,7 +1104,7 @@ button { font-family: inherit; }
   top: 0.75rem;
   right: 0.75rem;
   z-index: 2;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(28, 28, 30, 0.8); /* dark so it shows over white drawings */
   color: var(--text);
   border: none;
   border-radius: 999px;
@@ -945,7 +1115,7 @@ button { font-family: inherit; }
   backdrop-filter: blur(10px);
 }
 
-.lightbox-close:hover { background: rgba(255, 255, 255, 0.22); }
+.lightbox-close:hover { background: rgba(58, 58, 60, 0.9); }
 
 /* ==========================================================================
    CONTACT

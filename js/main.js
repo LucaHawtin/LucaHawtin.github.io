@@ -302,18 +302,44 @@ function initLightbox() {
   const closeBtn = lightbox.querySelector('.lightbox-close');
   const items = document.querySelectorAll('.gallery-item');
 
+  // Zoom buttons are built here rather than in every page's markup; they
+  // are only shown while an image is open.
+  const zoomBar = document.createElement('div');
+  zoomBar.className = 'lightbox-zoom';
+  zoomBar.innerHTML =
+    '<button type="button" data-zoom="out" aria-label="Zoom out">&minus;</button>' +
+    '<button type="button" data-zoom="reset" aria-label="Reset zoom">100%</button>' +
+    '<button type="button" data-zoom="in" aria-label="Zoom in">+</button>';
+  lightbox.querySelector('.lightbox-inner').appendChild(zoomBar);
+  const zoomLabel = zoomBar.querySelector('[data-zoom="reset"]');
+  let zoom = null; // controls for the image currently open, if any
+
+  zoomBar.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn || !zoom) return;
+    if (btn.dataset.zoom === 'in') zoom.step(1.5);
+    if (btn.dataset.zoom === 'out') zoom.step(1 / 1.5);
+    if (btn.dataset.zoom === 'reset') zoom.reset();
+  });
+
   function openLightbox(item) {
     const type = item.dataset.type;
     const src = item.dataset.src;
     const caption = item.dataset.caption || '';
 
     mediaHost.innerHTML = '';
+    zoom = null;
+    lightbox.classList.toggle('is-image', type === 'image');
 
     if (type === 'image') {
       const img = document.createElement('img');
       img.src = src;
       img.alt = caption;
+      img.draggable = false;
       mediaHost.appendChild(img);
+      zoom = attachZoom(img, mediaHost, (scale) => {
+        zoomLabel.textContent = `${Math.round(scale * 100)}%`;
+      });
     } else if (type === 'video') {
       const video = document.createElement('video');
       video.src = src;
@@ -360,6 +386,7 @@ function initLightbox() {
   function closeLightbox() {
     lightbox.classList.remove('is-open');
     mediaHost.innerHTML = '';
+    zoom = null;
   }
 
   items.forEach((item) => {
@@ -373,10 +400,124 @@ function initLightbox() {
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
-      closeLightbox();
+    if (!lightbox.classList.contains('is-open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (!zoom) return;
+    if (e.key === '+' || e.key === '=') zoom.step(1.5);
+    if (e.key === '-') zoom.step(1 / 1.5);
+    if (e.key === '0') zoom.reset();
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Zoom and pan for an image in the lightbox: scroll wheel or pinch zooms
+// towards the pointer, double-click toggles between fit and 2.5x, and
+// dragging pans once zoomed in. Returns { step, reset } for the buttons.
+// ---------------------------------------------------------------------------
+function attachZoom(img, host, onChange) {
+  const MAX_SCALE = 6;
+  let scale = 1;
+  let x = 0;
+  let y = 0;
+  const pointers = new Map();
+  let pinch = null; // { dist, scale } when two fingers are down
+  let drag = null;  // { px, py, x, y } when one pointer is panning
+
+  function apply(animate) {
+    img.style.transition = animate ? 'transform 0.2s ease' : 'none';
+    img.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+    img.classList.toggle('is-zoomed', scale > 1);
+    onChange(scale);
+  }
+
+  // stop the image being panned past its own edges
+  function clamp() {
+    const box = host.getBoundingClientRect();
+    const maxX = Math.max(0, (img.offsetWidth * scale - box.width) / 2);
+    const maxY = Math.max(0, (img.offsetHeight * scale - box.height) / 2);
+    x = Math.min(maxX, Math.max(-maxX, x));
+    y = Math.min(maxY, Math.max(-maxY, y));
+  }
+
+  // zoom so the point under (cx, cy) stays where it is on screen
+  function zoomAt(next, cx, cy, animate) {
+    next = Math.min(MAX_SCALE, Math.max(1, next));
+    const box = host.getBoundingClientRect();
+    const px = cx - (box.left + box.width / 2);
+    const py = cy - (box.top + box.height / 2);
+    x = px - (px - x) * (next / scale);
+    y = py - (py - y) * (next / scale);
+    scale = next;
+    clamp();
+    apply(animate);
+  }
+
+  function zoomAtCentre(next, animate) {
+    const box = host.getBoundingClientRect();
+    zoomAt(next, box.left + box.width / 2, box.top + box.height / 2, animate);
+  }
+
+  host.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    zoomAt(scale * Math.exp(-e.deltaY * 0.0015), e.clientX, e.clientY, false);
+  }, { passive: false });
+
+  img.addEventListener('dblclick', (e) => {
+    zoomAt(scale > 1 ? 1 : 2.5, e.clientX, e.clientY, true);
+  });
+
+  function distance() {
+    const [a, b] = [...pointers.values()];
+    return Math.hypot(a.x - b.x, a.y - b.y);
+  }
+
+  function startDrag() {
+    const [p] = [...pointers.values()];
+    drag = p ? { px: p.x, py: p.y, x, y } : null;
+  }
+
+  img.addEventListener('pointerdown', (e) => {
+    img.setPointerCapture(e.pointerId);
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.size === 2) {
+      pinch = { dist: distance(), scale };
+      drag = null;
+    } else {
+      startDrag();
     }
   });
+
+  img.addEventListener('pointermove', (e) => {
+    if (!pointers.has(e.pointerId)) return;
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pinch && pointers.size === 2) {
+      const [a, b] = [...pointers.values()];
+      zoomAt(pinch.scale * (distance() / pinch.dist), (a.x + b.x) / 2, (a.y + b.y) / 2, false);
+    } else if (drag && scale > 1) {
+      x = drag.x + (e.clientX - drag.px);
+      y = drag.y + (e.clientY - drag.py);
+      clamp();
+      img.classList.add('is-dragging');
+      apply(false);
+    }
+  });
+
+  function endPointer(e) {
+    pointers.delete(e.pointerId);
+    img.classList.remove('is-dragging');
+    if (pointers.size < 2) pinch = null;
+    startDrag(); // a finger left on the screen after a pinch keeps panning
+  }
+
+  img.addEventListener('pointerup', endPointer);
+  img.addEventListener('pointercancel', endPointer);
+
+  apply(false);
+
+  return {
+    step: (factor) => zoomAtCentre(scale * factor, true),
+    reset: () => zoomAtCentre(1, true),
+  };
 }
 
 // ---------------------------------------------------------------------------

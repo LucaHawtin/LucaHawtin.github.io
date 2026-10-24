@@ -23,7 +23,7 @@
 <meta name="twitter:description" content="Finite difference modelling of steady-state and transient two-dimensional heat conduction for EMTH271.">
 <meta name="twitter:image" content="https://lucahawtin.com/assets/projects/project-7/picture2.jpg">
 
-<link rel="stylesheet" href="../css/style.css?v=20260903"> 
+<link rel="stylesheet" href="../css/style.css?v=20261025m"> 
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-04SLD2YV0Y"></script>
@@ -62,65 +62,79 @@
   <p class="tagline">Two finite difference case studies modelling steady-state and transient heat conduction through a 2D body.</p>
 </header>
 
-<section class="project-block" style="border-top: none;">
+<section class="project-block project-block--report" style="border-top: none;">
   <div class="project-inner">
 
-    <div class="project-body">
-      <div class="summary">
-        <p>
-          For a mathematics couse in 2025, I was tasked with modelling heat transfer through a rectangular body using the finite difference method (FDM). I built numerical models of two-dimensional heat conduction, first solving the <i>steady-state</i> problem with mixed boundary conditions with prescribed heat flux, fixed temperature, an insulated edge, and convective heat transfer — using Gauss-Seidel iteration. We then extended this to the <i>transient</i> case for a stainless-steel plate, using the explicit FDM to track how the temperature field evolves over time, stepping forward from an initial condition subject to the stability criterion on the time step.
-        </p>
-
-        <p>
-          I used object oriented programming in Python to build the solvers, creating a <code>Body</code> class to represent the 2D domain and its boundary conditions, and a <code>Solver</code> class to implement the numerical methods. The code was structured to allow easy modification of the mesh resolution, boundary conditions, and material properties, enabling a systematic exploration of how these factors influence the solution.
-        </p>
-        <ul class="tags">
-          <li>Python</li>
-          <li>Finite Difference Method</li>
-          <li>Numerical Modelling</li>
-          <li>Heat Transfer</li>
-        </ul>
+    <div class="spec-grid spec-grid--wide">
+      <div class="spec">
+        <span class="spec-label">Timeline</span>
+        <span class="spec-value">2025</span>
       </div>
-      <div class="spec-grid">
-        <div class="spec">
-          <span class="spec-label">Timeline</span>
-          <span class="spec-value">2025</span>
-        </div>
-        <div class="spec">
-          <span class="spec-label">Team size</span>
-          <span class="spec-value">2 Students</span>
-        </div>
-        <div class="spec">
-          <span class="spec-label">Project Type</span>
-          <span class="spec-value">Coursework</span>
-        </div>
-        <div class="spec">
-          <span class="spec-label">Course</span>
-          <span class="spec-value">EMTH271, University of Canterbury</span>
-        </div>
+      <div class="spec">
+        <span class="spec-label">Team size</span>
+        <span class="spec-value">2 Students</span>
+      </div>
+      <div class="spec">
+        <span class="spec-label">Project Type</span>
+        <span class="spec-value">Coursework</span>
+      </div>
+      <div class="spec">
+        <span class="spec-label">Course</span>
+        <span class="spec-value">EMTH271, University of Canterbury</span>
       </div>
     </div>
 
-    <span class="gallery-label">Gallery — photos, drawings, and videos</span>
-    <div class="gallery">
+    <ul class="tags tags--wide">
+      <li>Python</li>
+      <li>Finite Difference Method</li>
+      <li>Numerical Modelling</li>
+      <li>Heat Transfer</li>
+    </ul>
 
-      <button class="gallery-item" data-type="image" data-src="../assets/projects/project-7/picture1.jpg" data-caption="Iteration count and solve time versus mesh size.">
-        <span class="thumb-frame"><img src="../assets/projects/project-7/picture1.jpg" alt="Iteration count and solve time versus mesh size." width="2700" height="1500" decoding="async"></span>
-      </button>
+    <article class="report-article">
 
-      <button class="gallery-item" data-type="image" data-src="../assets/projects/project-7/picture4.jpg" data-caption="Minimum and maximum temperature converging as the mesh is refined.">
-        <span class="thumb-frame"><img src="../assets/projects/project-7/picture4.jpg" alt="Minimum and maximum temperature converging as the mesh is refined." width="2700" height="1500" decoding="async"></span>
-      </button>
+      <figure class="inline-fig inline-fig--right">
+        <button class="gallery-item" data-type="image" data-src="../assets/projects/project-7/picture2.jpg" data-caption="Steady-state temperature distribution across the body on a coarse mesh.">
+          <span class="thumb-frame"><img src="../assets/projects/project-7/picture2.jpg" alt="Steady-state temperature distribution across the body on a coarse mesh." width="1920" height="1440" loading="lazy" decoding="async"></span>
+        </button>
+        <figcaption>Steady-state temperature distribution across the body on a coarse mesh.</figcaption>
+      </figure>
 
-      <button class="gallery-item" data-type="image" data-src="../assets/projects/project-7/picture3.jpg" data-caption="Temperature distribution with the convective boundary removed, behaving as an insulated wall.">
-        <span class="thumb-frame"><img src="../assets/projects/project-7/picture3.jpg" alt="Temperature distribution with the convective boundary removed, behaving as an insulated wall." width="1920" height="1440" decoding="async"></span>
-      </button>
+      <p>For a mathematics course in 2025, I was tasked with modelling heat transfer through a rectangular body using the finite difference method (FDM). We worked through two case studies: a steady-state problem and a transient one.</p>
 
-      <button class="gallery-item" data-type="image" data-src="../assets/projects/project-7/picture2.jpg" data-caption="Steady-state temperature distribution across the body on a coarse mesh.">
-        <span class="thumb-frame"><img src="../assets/projects/project-7/picture2.jpg" alt="Steady-state temperature distribution across the body on a coarse mesh." width="1920" height="1440" decoding="async"></span>
-      </button>
+      <p>The first case study modelled steady-state heat conduction through the body with mixed boundary conditions: a prescribed heat flux, a fixed temperature, an insulated edge, and convective heat transfer. The resulting system of equations was solved with Gauss-Seidel iteration.</p>
 
-    </div>
+      <p class="clear-right">To check that the solution could be trusted, we refined the mesh and watched how the results changed. The minimum and maximum temperatures converged as the mesh got finer, while the iteration count and solve time grew.</p>
+
+      <div class="inline-pair">
+        <figure class="inline-fig">
+          <button class="gallery-item" data-type="image" data-src="../assets/projects/project-7/picture4.jpg" data-caption="Minimum and maximum temperature converging as the mesh is refined.">
+            <span class="thumb-frame"><img src="../assets/projects/project-7/picture4.jpg" alt="Minimum and maximum temperature converging as the mesh is refined." width="2700" height="1500" loading="lazy" decoding="async"></span>
+          </button>
+          <figcaption>Minimum and maximum temperature converging as the mesh is refined.</figcaption>
+        </figure>
+        <figure class="inline-fig">
+          <button class="gallery-item" data-type="image" data-src="../assets/projects/project-7/picture1.jpg" data-caption="Iteration count and solve time versus mesh size.">
+            <span class="thumb-frame"><img src="../assets/projects/project-7/picture1.jpg" alt="Iteration count and solve time versus mesh size." width="2700" height="1500" loading="lazy" decoding="async"></span>
+          </button>
+          <figcaption>Iteration count and solve time versus mesh size.</figcaption>
+        </figure>
+      </div>
+
+      <figure class="inline-fig inline-fig--left">
+        <button class="gallery-item" data-type="image" data-src="../assets/projects/project-7/picture3.jpg" data-caption="Temperature distribution with the convective boundary removed, behaving as an insulated wall.">
+          <span class="thumb-frame"><img src="../assets/projects/project-7/picture3.jpg" alt="Temperature distribution with the convective boundary removed, behaving as an insulated wall." width="1920" height="1440" loading="lazy" decoding="async"></span>
+        </button>
+        <figcaption>Temperature distribution with the convective boundary removed, behaving as an insulated wall.</figcaption>
+      </figure>
+
+      <p>As a sanity check, we removed the convective boundary. The edge then behaved like an insulated wall, as expected, which confirmed the boundary conditions were working correctly.</p>
+
+      <p>We then extended the model to the transient case for a stainless-steel plate. Using the explicit finite difference method, the temperature field is stepped forward in time from an initial condition, with the time step limited by the stability criterion.</p>
+
+      <p>I built the solvers in Python using object-oriented programming: a Body class represents the 2D domain and its boundary conditions, and a Solver class implements the numerical methods. This made it easy to change the mesh resolution, boundary conditions and material properties, and to explore how each one affects the solution.</p>
+
+    </article>
   </div>
 </section>
 
@@ -148,6 +162,6 @@
   </div>
 </div>
 
-<script src="../js/main.js?v=20260903b"></script>
+<script src="../js/main.js?v=20261025z"></script>
 </body>
 </html>
