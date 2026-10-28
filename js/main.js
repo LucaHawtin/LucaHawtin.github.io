@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHashCentering();
   initContactForm();
   initFooterYear();
+  initFigRows();
   initAnalyticsEvents();
 });
 
@@ -616,4 +617,58 @@ function initHashCentering() {
   window.addEventListener('hashchange', () => {
     if (window.location.hash) scrollHashToCenter(window.location.hash, 'smooth');
   });
+}
+
+/* A photo beside a paragraph: scale the photo (never crop it) so it is exactly as
+   tall as the text next to it. Each figure carries its aspect ratio in --ar. */
+function initFigRows() {
+  const rows = Array.from(document.querySelectorAll('.fig-row'));
+  if (!rows.length) return;
+  const narrow = window.matchMedia('(max-width: 700px)');
+
+  const layout = () => {
+    rows.forEach((row) => {
+      const fig = row.querySelector('.inline-fig');
+      const text = row.querySelector('.fig-text');
+      if (!fig || !text) return;
+      if (narrow.matches) {
+        row.style.removeProperty('--fw');
+        row.style.minHeight = '';
+        fig.style.height = '';
+        fig.style.alignSelf = '';
+        return;
+      }
+      const ar = parseFloat(fig.style.getPropertyValue('--ar')) || 1.333;
+            const rowW = row.clientWidth;
+      const minW = rowW * 0.42; // never smaller than this
+      const maxW = rowW * 0.55;
+      let w = rowW * 0.36;
+      for (let i = 0; i < 5; i++) {
+        row.style.setProperty('--fw', w + 'px');
+        const h = text.getBoundingClientRect().height;
+        const next = Math.max(minW, Math.min(h * ar, maxW));
+        if (Math.abs(next - w) < 1) break;
+        w = next;
+      }
+      row.style.setProperty('--fw', w + 'px');
+      // the photo can't always match the text exactly without cropping: if the
+      // width is capped, centre the (shorter) photo beside the text; if the text
+      // is very short, let the row grow to fit the photo instead
+      const h = text.getBoundingClientRect().height;
+      const photoH = w / ar;
+      row.style.minHeight = photoH > h ? photoH + 'px' : '';
+      if (photoH < h - 1) {
+        fig.style.height = photoH + 'px';
+        fig.style.alignSelf = 'center';
+      } else {
+        fig.style.height = '';
+        fig.style.alignSelf = '';
+      }
+    });
+  };
+
+  layout();
+  window.addEventListener('load', layout);
+  window.addEventListener('resize', layout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
 }

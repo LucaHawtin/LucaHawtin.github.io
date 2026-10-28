@@ -23,7 +23,7 @@
 <meta name="twitter:description" content="Finite difference modelling of steady-state and transient two-dimensional heat conduction for EMTH271.">
 <meta name="twitter:image" content="https://lucahawtin.com/assets/projects/project-7/picture2.jpg">
 
-<link rel="stylesheet" href="../css/style.css?v=20261025m"> 
+<link rel="stylesheet" href="../css/style.css?v=20261028j"> 
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-04SLD2YV0Y"></script>
@@ -93,27 +93,28 @@
 
     <article class="report-article">
 
-      <figure class="inline-fig inline-fig--right">
-        <button class="gallery-item" data-type="image" data-src="../assets/projects/project-7/picture2.jpg" data-caption="Steady-state temperature distribution across the body on a coarse mesh.">
-          <span class="thumb-frame"><img src="../assets/projects/project-7/picture2.jpg" alt="Steady-state temperature distribution across the body on a coarse mesh." width="1920" height="1440" loading="lazy" decoding="async"></span>
-        </button>
-        <figcaption>Steady-state temperature distribution across the body on a coarse mesh.</figcaption>
-      </figure>
+      <div class="fig-row fig-row--right">
+  <div class="fig-text">
+    <p>For a mathematics course in 2025, I was tasked with modelling heat transfer through a rectangular body using the finite difference method (FDM). We worked through two case studies: a steady-state problem and a transient one.</p>
+    <p>The first case study modelled steady-state heat conduction through the body with mixed boundary conditions: a prescribed heat flux, a fixed temperature, an insulated edge, and convective heat transfer. The resulting system of equations was solved with Gauss-Seidel iteration.</p>
+    <p>To check that the solution could be trusted, we refined the mesh and watched how the results changed. The minimum and maximum temperatures converged as the mesh got finer, while the iteration count and solve time grew.</p>
+  </div>
+  <figure style="--ar:1.3333" class="inline-fig">
+            <button class="gallery-item" data-type="image" data-src="../assets/projects/project-7/picture2.jpg" data-caption="Steady-state temperature distribution across the body on a coarse mesh.">
+              <span class="thumb-frame"><img src="../assets/projects/project-7/picture2.jpg" alt="Steady-state temperature distribution across the body on a coarse mesh." width="1920" height="1440" loading="lazy" decoding="async"></span>
+            </button>
+            <figcaption>Steady-state temperature distribution across the body on a coarse mesh.</figcaption>
+          </figure>
+      </div>
 
-      <p>For a mathematics course in 2025, I was tasked with modelling heat transfer through a rectangular body using the finite difference method (FDM). We worked through two case studies: a steady-state problem and a transient one.</p>
-
-      <p>The first case study modelled steady-state heat conduction through the body with mixed boundary conditions: a prescribed heat flux, a fixed temperature, an insulated edge, and convective heat transfer. The resulting system of equations was solved with Gauss-Seidel iteration.</p>
-
-      <p class="clear-right">To check that the solution could be trusted, we refined the mesh and watched how the results changed. The minimum and maximum temperatures converged as the mesh got finer, while the iteration count and solve time grew.</p>
-
-      <div class="inline-pair">
-        <figure class="inline-fig">
+      <div style="--sum:3.6000" class="inline-pair">
+        <figure style="--ar:1.8000" class="inline-fig">
           <button class="gallery-item" data-type="image" data-src="../assets/projects/project-7/picture4.jpg" data-caption="Minimum and maximum temperature converging as the mesh is refined.">
             <span class="thumb-frame"><img src="../assets/projects/project-7/picture4.jpg" alt="Minimum and maximum temperature converging as the mesh is refined." width="2700" height="1500" loading="lazy" decoding="async"></span>
           </button>
           <figcaption>Minimum and maximum temperature converging as the mesh is refined.</figcaption>
         </figure>
-        <figure class="inline-fig">
+        <figure style="--ar:1.8000" class="inline-fig">
           <button class="gallery-item" data-type="image" data-src="../assets/projects/project-7/picture1.jpg" data-caption="Iteration count and solve time versus mesh size.">
             <span class="thumb-frame"><img src="../assets/projects/project-7/picture1.jpg" alt="Iteration count and solve time versus mesh size." width="2700" height="1500" loading="lazy" decoding="async"></span>
           </button>
@@ -121,18 +122,19 @@
         </figure>
       </div>
 
-      <figure class="inline-fig inline-fig--left">
-        <button class="gallery-item" data-type="image" data-src="../assets/projects/project-7/picture3.jpg" data-caption="Temperature distribution with the convective boundary removed, behaving as an insulated wall.">
-          <span class="thumb-frame"><img src="../assets/projects/project-7/picture3.jpg" alt="Temperature distribution with the convective boundary removed, behaving as an insulated wall." width="1920" height="1440" loading="lazy" decoding="async"></span>
-        </button>
-        <figcaption>Temperature distribution with the convective boundary removed, behaving as an insulated wall.</figcaption>
-      </figure>
-
-      <p>As a sanity check, we removed the convective boundary. The edge then behaved like an insulated wall, as expected, which confirmed the boundary conditions were working correctly.</p>
-
-      <p>We then extended the model to the transient case for a stainless-steel plate. Using the explicit finite difference method, the temperature field is stepped forward in time from an initial condition, with the time step limited by the stability criterion.</p>
-
-      <p>I built the solvers in Python using object-oriented programming: a Body class represents the 2D domain and its boundary conditions, and a Solver class implements the numerical methods. This made it easy to change the mesh resolution, boundary conditions and material properties, and to explore how each one affects the solution.</p>
+      <div class="fig-row fig-row--left">
+  <figure style="--ar:1.3333" class="inline-fig">
+            <button class="gallery-item" data-type="image" data-src="../assets/projects/project-7/picture3.jpg" data-caption="Temperature distribution with the convective boundary removed, behaving as an insulated wall.">
+              <span class="thumb-frame"><img src="../assets/projects/project-7/picture3.jpg" alt="Temperature distribution with the convective boundary removed, behaving as an insulated wall." width="1920" height="1440" loading="lazy" decoding="async"></span>
+            </button>
+            <figcaption>Temperature distribution with the convective boundary removed, behaving as an insulated wall.</figcaption>
+          </figure>
+  <div class="fig-text">
+    <p>As a sanity check, we removed the convective boundary. The edge then behaved like an insulated wall, as expected, which confirmed the boundary conditions were working correctly.</p>
+    <p>We then extended the model to the transient case for a stainless-steel plate. Using the explicit finite difference method, the temperature field is stepped forward in time from an initial condition, with the time step limited by the stability criterion.</p>
+    <p>I built the solvers in Python using object-oriented programming: a Body class represents the 2D domain and its boundary conditions, and a Solver class implements the numerical methods. This made it easy to change the mesh resolution, boundary conditions and material properties, and to explore how each one affects the solution.</p>
+  </div>
+      </div>
 
     </article>
   </div>
@@ -162,6 +164,6 @@
   </div>
 </div>
 
-<script src="../js/main.js?v=20261025z"></script>
+<script src="../js/main.js?v=20261028g"></script>
 </body>
 </html>
