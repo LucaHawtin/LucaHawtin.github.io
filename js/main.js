@@ -362,7 +362,11 @@ function initLightbox() {
 
       if (videoId) {
         // 2. Build the exact privacy-safe embed link YouTube demands
-        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
+        // Optional start time from the link (?t=150, &start=150, ?t=2m30s)
+        const tm = src.match(/[?&#](?:t|start)=(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s?)?(?=[&#]|$)/);
+        const startSec = tm ? (+tm[1] || 0) * 3600 + (+tm[2] || 0) * 60 + (+tm[3] || 0) : 0;
+        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1` +
+          (startSec ? `&start=${startSec}` : '');
       } else {
         // Fallback just in case the link was already an embed layout
         iframe.src = src + '?autoplay=1';
