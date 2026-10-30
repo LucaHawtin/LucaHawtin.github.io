@@ -1,50 +1,33 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta name="robots" content="noindex, nofollow, noarchive">
 <meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GCI 5.11</title>
-<link rel="icon" type="image/png" href="data:image/png;base64,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">
-<meta name="theme-color" content="#1f6f5c">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" href="/assets/icons/favicon.ico">
+<meta name="theme-color" content="#000000">
 <style>
 /* Layout: a gradebook — course shelf on the home view; per-course ledger with a score bar and target finder above the assessment table. */
 :root{
-  --bg:#f3f5f4; --surface:#ffffff; --surface-2:#eef1f0; --line:#dde3e1; --line-strong:#c4cdca;
-  --fg:#16201d; --muted:#5d6b67; --faint:#8a9692;
-  --accent:#1f6f5c; --accent-ink:#ffffff; --accent-soft:#dcefe9;
-  --earned:#1f6f5c; --lost:#d9a9a0; --remaining:#c9d3d0;
-  --bad:#c0392b; --bad-soft:#fbe5e2; --warn:#a86a00; --warn-soft:#fdf0d6;
-  --gA:#1f7a52; --gA-bg:#dcf1e6; --gB:#1f5f8f; --gB-bg:#dde9f5; --gC:#8a6400; --gC-bg:#f8ecc9;
-  --gD:#b25a12; --gD-bg:#fbe3cf; --gE:#b3261e; --gE-bg:#f9dedb; --gN:#6b7774; --gN-bg:#e8ecea;
-  --shadow:0 1px 2px rgba(20,40,35,.06),0 4px 16px rgba(20,40,35,.06);
-  --f-ui:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --f-num:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
-  --r:10px;
-  --c-avail:#9cc8bb; --c-trend:#3f7fbf; --c-lost:#d98b7e;
+  color-scheme:dark;
+  --bg:#000000; --surface:#1c1c1e; --surface-2:#2a2a2d; --line:rgba(255,255,255,.08); --line-strong:rgba(255,255,255,.16);
+  --fg:#f5f5f7; --muted:#86868b; --faint:#6e6e73;
+  --accent:#2997ff; --accent-ink:#ffffff; --accent-soft:rgba(41,151,255,.16);
+  --earned:#2997ff; --lost:#6e3d37; --remaining:#2c2c2e;
+  --bad:#ff6b5e; --bad-soft:rgba(255,107,94,.14); --warn:#ffb340; --warn-soft:rgba(255,179,64,.14);
+  --gA:#6fd3a4; --gA-bg:#163a2b; --gB:#62b3ff; --gB-bg:#13304d; --gC:#e5c25a; --gC-bg:#3a3014;
+  --gD:#f0a364; --gD-bg:#3d2615; --gE:#ff7b6e; --gE-bg:#3d1c19; --gN:#98989d; --gN-bg:#2a2a2d;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 16px rgba(0,0,0,.35);
+  --f-ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --f-num:ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --r:12px;
+  --c-avail:#1d4f80; --c-trend:#62b3ff; --c-lost:#b65c50;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0f1513; --surface:#171f1c; --surface-2:#1d2724; --line:#27322f; --line-strong:#384541;
-  --fg:#e5ece9; --muted:#9aa8a3; --faint:#6f7d78;
-  --accent:#4fb89b; --accent-ink:#06120e; --accent-soft:#183a31;
-  --earned:#4fb89b; --lost:#6e3d37; --remaining:#2c3835;
-  --bad:#f0857a; --bad-soft:#3a1f1c; --warn:#e9b24a; --warn-soft:#3a2d12;
-  --gA:#6fd3a4; --gA-bg:#163a2b; --gB:#7db8e8; --gB-bg:#162d42; --gC:#e5c25a; --gC-bg:#3a3014;
-  --gD:#f0a364; --gD-bg:#3d2615; --gE:#f0857a; --gE-bg:#3d1c19; --gN:#9aa8a3; --gN-bg:#24302c;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.25); color-scheme:dark;
-  --c-avail:#2f6e5e; --c-trend:#7db8e8; --c-lost:#b65c50;}}
-:root[data-theme="dark"]{
-  --bg:#0f1513; --surface:#171f1c; --surface-2:#1d2724; --line:#27322f; --line-strong:#384541;
-  --fg:#e5ece9; --muted:#9aa8a3; --faint:#6f7d78;
-  --accent:#4fb89b; --accent-ink:#06120e; --accent-soft:#183a31;
-  --earned:#4fb89b; --lost:#6e3d37; --remaining:#2c3835;
-  --bad:#f0857a; --bad-soft:#3a1f1c; --warn:#e9b24a; --warn-soft:#3a2d12;
-  --gA:#6fd3a4; --gA-bg:#163a2b; --gB:#7db8e8; --gB-bg:#162d42; --gC:#e5c25a; --gC-bg:#3a3014;
-  --gD:#f0a364; --gD-bg:#3d2615; --gE:#f0857a; --gE-bg:#3d1c19; --gN:#9aa8a3; --gN-bg:#24302c;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.25); color-scheme:dark;
-  --c-avail:#2f6e5e; --c-trend:#7db8e8; --c-lost:#b65c50;}
 
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -67,6 +50,7 @@ main{max-width:1080px;margin:0 auto;padding:28px 20px 60px}
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line-strong);background:var(--surface);padding:7px 13px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13.5px;transition:background .12s,border-color .12s}
+a.btn{text-decoration:none;color:var(--fg)}
 .btn:hover{background:var(--surface-2)}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .btn.primary:hover{filter:brightness(1.08)}
@@ -235,6 +219,7 @@ table.mini td,table.mini th{padding:6px 10px}
 <body>
 <header class="bar"><div class="bar-in">
   <div class="brand">GCI <small>v5.11 web</small></div>
+  <a class="btn ghost" href="https://lucahawtin.com/" title="Back to lucahawtin.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg>Home</a>
   <div class="spacer"></div>
   <span id="saveChip" class="chip"><span class="dot"></span><span id="saveText">Not connected</span></span>
   <button class="btn ghost" id="sumBtn" title="All courses and GPA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Summary</button>
@@ -435,6 +420,41 @@ const saveConfig=()=>queueWrite("courses_config.json",()=>JSON.stringify(S.cours
 const saveCourse=name=>{const c=S.data[name]; if(c) queueWrite(fileFor(name),()=>courseToCSV(c));};
 window.addEventListener("beforeunload",e=>{ if(pendingWrites||Object.values(timers).some(Boolean)&&$("#saveChip").classList.contains("busy")){e.preventDefault();e.returnValue="";} });
 
+
+/* ============ Blank CSV starter pack (zip, no libraries) ============ */
+const BLANK_FILES={"ENME315.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nHomework,,UND,12,,Homework 1::1.090909;Homework 2::1.090909;Homework 3::1.090909;Homework 4::1.090909;Homework 5::1.090909;Homework 7::1.090909;Homework 8::1.090909;Homework 9::1.090909;Homework 10::1.090909;Homework 11::0.0;Homework 12::0.0\r\nHome Lab,,UND,3,,\r\nQuiz 1,,UND,15,,\r\nQuiz 2,,UND,15,,\r\nQuiz 3,,UND,15,,\r\nFinal Exam,,UND,40,,\r\n", "ENME314.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nHomeworks,,UND,20,,Homework 1::5.0;Homework 2::5.0;Homework 3::5.0;Homework 4::5.0\r\nLab A Report,,UND,10,,\r\nMid-Semester Test,,UND,15,,\r\nLab B report,,UND,5,,\r\nFinal Exam,,UND,50,,Final Exam 1::0.0\r\n", "ENME313.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nHomework,,UND,10,,\r\nTest,,UND,25,,\r\nLaboratories,,UND,15,,\r\nFinal Examination,,UND,50,,\r\n", "ENME311.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nAssignment 1,,UND,30,,\r\nAssignment 2,,UND,30,,\r\nAssignment 3,,UND,10,,\r\nFinal Exam,,UND,30,,\r\n", "ENME307.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nMid-term Test 1,,UND,15,,\r\nFinal Test,,UND,25,,\r\nLab A Worksheet,,UND,5,,\r\nLab B Worksheet,,UND,5,,\r\nMid-term Test 2,,UND,15,,\r\nLab C Worksheet,,UND,5,,\r\nLab D Worksheet,,UND,5,,\r\nFinal Exam,,UND,25,,\r\n", "ENME303.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nTest 1,,UND,25,,\r\nLab Report,,UND,10,,\r\nTest 2,,UND,25,,\r\nExam,,UND,40,,\r\n", "ENME302.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nTest,,UND,25,,\r\nAssignment 1,,UND,10,,\r\nQuizzes,,UND,5,,Quiz 1::1.0;Quiz 2::1.0;Quiz 3::1.0;Quiz 4::1.0;Quiz 5::1.0\r\nAssignment 2,,UND,10,,\r\nFinal Exam,,UND,50,,\r\n", "ENME301.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nDesign Assignment 1A,,UND,15,,\r\nDesign Assignment 1B,,UND,15,,\r\nProduction Management Test 1,,UND,16,,\r\nDesign Assignment 2,,UND,30,,\r\nProduction Management Test 2,,UND,18,,\r\nProduction Management Assignment,,UND,6,,\r\n", "EMTH271.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nLabs,,UND,10,,Labs 1::1.0;Labs 2::1.0;Labs 3::1.0;Labs 4::1.0;Labs 5::1.0;Labs 6::1.0;Labs 7::1.0;Labs 8::1.0;Labs 9::1.0;Labs 10::0.0\r\nAssignment 1,,UND,9,,\r\nTest,,UND,32,,\r\nAssignment 2,,UND,9,,\r\nFinal Exam,,UND,40,,Final Exam 1::0.0\r\n", "ENME221.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nWarman Progess,,UND,6,,\r\nWarman Build,,UND,8,,\r\nWarman Competition,,UND,20,,\r\nEngine Tear Down,,UND,7,,\r\nCNC Code,,UND,5,,\r\nLaser/Design Lab,,UND,5,,\r\nInteractive Video,,UND,9,,\r\nFinal Exam,,UND,40,,\r\n", "ENME215.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nQuizzes,,UND,35,,Quiz 1::10.0;Quiz 2::12.5;Quiz 3::12.5;Quizzes 4::0.0\r\nLab Report,,UND,5,,\r\nHomework,,UND,10,,Homework 1::1.25;Homework 2::1.25;Homework 3::1.25;Homework 4::1.25;Homework 5::0.0;Homework 6::1.25;Homework 7::1.25;Homework 8::0.0;Homework 9::1.25;Homework 10::1.25\r\nFinal Exam,,UND,50,,Final Exam 1::0.0\r\n", "EMTH210.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nOn-Line Quizzes,,UND,10,,On-Line Quizzes 1::1.0;On-Line Quizzes 2::1.0;On-Line Quizzes 3::1.0;On-Line Quizzes 4::1.0;On-Line Quizzes 5::1.0;On-Line Quizzes 6::1.0;On-Line Quizzes 7::1.0;On-Line Quizzes 8::1.0;On-Line Quizzes 9::1.0;On-Line Quizzes 10::1.0;On-Line Quizzes 11::0.0;On-Line Quizzes 12::0.0\r\nTutorials,,UND,10,,Tutorials 1::1.0;Tutorials 2::1.0;Tutorials 3::0.0;Tutorials 4::1.0;Tutorials 5::1.0;Tutorials 6::1.0;Tutorials 7::1.0;Tutorials 8::1.0;Tutorials 9::1.0;Tutorials 10::1.0;Tutorials 11::1.0;Tutorials 12::0.0\r\nTest,,UND,35,,\r\nExam,,UND,45,,\r\n", "ENME207.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nLab,,UND,17,,Lab A Quiz::0.5;Lab A Attendance::1.5;Lab B Quiz::0.5;Lab B Report::4.5;Lab C Quiz::0.5;Lab C Report::0.0;Lab D Quiz::0.5;Lab D Report::0.0\r\nHomeworks,,UND,8,,Homeworks 1::1.0;Homeworks 2::1.0;Homeworks 3::0.0;Homeworks 4::1.0;Homeworks 5::1.0;Homeworks 6::1.0;Homeworks 7::1.0;Homeworks 8::1.0;Homeworks 9::1.0;Homeworks 10::0.0;Homeworks 11::0.0\r\nQuizzes,,UND,24,,Quizzes 1::8.0;Quizzes 2::0.0;Quizzes 3::8.0;Quizzes 4::8.0\r\nFinal Exam,,UND,51,,\r\n", "ENME203.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nAssignment 1,,UND,4,,\r\nTest 1,,UND,14,,\r\nAssignment 2,,UND,4,,\r\nTest 2,,UND,14,,\r\nAssignment 3,,UND,10,,Technical::4.0;Written Language::6.0\r\nTest 3,,UND,14,,\r\nFinal Exam,,UND,40,,\r\n", "ENME202.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nOn-Line Quizzes,,UND,10,,On-Line Quizzes 1::1.0;On-Line Quizzes 2::1.0;On-Line Quizzes 3::1.0;On-Line Quizzes 4::1.0;On-Line Quizzes 5::1.0;On-Line Quizzes 6::1.0;On-Line Quizzes 7::1.0;On-Line Quizzes 8::1.0;On-Line Quizzes 9::1.0;On-Line Quizzes 10::1.0;On-Line Quizzes 11::0.0;On-Line Quizzes 12::0.0\r\nTest A,,UND,15,,\r\nTest B,,UND,15,,\r\nExam,,UND,60,,Exam 1::0.0\r\n", "ENME201.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nTest B Descriptice Geometry,,UND,20,,\r\nEngineering Drawing,,UND,10,,\r\nWarman Project - Design Report,,UND,10,,\r\nAnatomy of Engineering,,UND,10,,\r\nCAD Tutorials,,UND,6,,\r\nCommunication Skills,,UND,5,,\r\nCAD Assignment,,UND,9,,\r\nTest A Design,,UND,30,,\r\n", "COSC131.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nLearning Modules,,UND,11,,Topic 1::1.0;Topic 2::1.0;Topic 3::1.0;Topic 4::1.0;Topic 5::1.0;Topic 6::1.0;Topic 7::1.0;Topic 8::1.0;Topic 9::1.0;Topic 10::1.0;Topic 11::1.0\r\nSelf-Assessment Quiz,,UND,5,,\r\nAssignment 1,,UND,7,,\r\nAssignment 2,,UND,7,,\r\nTest,,UND,15,,\r\nFinal Exam,,UND,55,,\r\n", "EMTH119.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nTutorial Participation,,UND,10,,\r\nOn-Line Quizzes,,UND,16,,Quiz 1::1.0;Quiz 2::1.0;Quiz 3::1.0;Quiz 4::1.0;Quiz 5::1.0;Quiz 6::1.0;Quiz 7::1.0;Quiz 8::1.0\r\nTest,,UND,34,,\r\nFinal Exam,,UND,40,,\r\n", "EMTH118.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nTutorials,,UND,10,,\r\nOnline Quizzes,,UND,10,,Quiz 1::1.0;Quiz 2::1.0;Quiz 3::1.0;Quiz 4::1.0;Quiz 5::1.0;Quiz 6::1.0;Quiz 7::1.0;Quiz 8::1.0;Quiz 9::1.0;Quiz 10::1.0;Quiz 11::1.0;Quiz 12::1.0\r\nTest 1,,UND,15,,\r\nTest 2,,UND,15,,\r\nFinal Exam,,UND,50,,\r\n", "CHEM111.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nLaboratory,,UND,15,,Safety Quiz::1.5;Lab 1::2.25;Lab 2::2.25;Lab 3::2.25;Lab 4::2.25;Lab 5::2.25;Lab 6::2.25\r\nBestChoice on-line Problems,,UND,5,,\r\nMid-Semester Test,,UND,30,,\r\nFinal Exam,,UND,50,,\r\n", "ENGR102.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nStatics Test,,UND,40,,\r\nDynamics Test,,UND,40,,\r\nWeekly Quizzes,,UND,10,,Statics Quiz 1::1.0;Statics Quiz 2::1.0;Statics Quiz 3::1.0;Dynamics Quiz 1::1.0;Dynamics Quiz 2::1.0;Dynamics Quiz 3::1.0;Dynamics Quiz 4::1.0\r\nTutorials,,UND,10,,\r\n", "ENGR101.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nChatGPT Report,,UND,5,,\r\nStudent Report,,UND,15,,\r\nProblem definition and constraints,,UND,1,,\r\nBrainstorming and solution selection,,UND,2,,\r\nPeer Assessment #1,,UND,1,,\r\nFinal report,,UND,15,,\r\nCompletion of on-line presentation training module,,UND,1,,\r\nOral presentation,,UND,3,,\r\nPeer Assessment #2,,UND,2,,\r\nMid-semester test,,UND,20,,\r\nEngineering Sketching,,UND,5,,\r\nFinal Examination,,UND,30,,\r\n", "PHYS101.csv": "Name,Raw,Grade,Weight,Weighted Score,Quizzes\r\nTutorials,,UND,10,,\r\nTest 1,,UND,15,,\r\nTest 2,,UND,15,,\r\nLaboratory,,UND,10,,Laboratory 1::1.0;Laboratory 2::1.0;Laboratory 3::1.0;Laboratory 4::1.0;Laboratory 5::1.0;Laboratory 6::1.0\r\nFinal Exam,,UND,50,,\r\n", "courses_config.json": "[\"ENME315\", \"ENME314\", \"ENME313\", \"ENME311\", \"ENME307\", \"ENME303\", \"ENME302\", \"ENME301\", \"EMTH271\", \"ENME221\", \"ENME215\", \"EMTH210\", \"ENME207\", \"ENME203\", \"ENME202\", \"ENME201\", \"COSC131\", \"EMTH119\", \"EMTH118\", \"CHEM111\", \"ENGR102\", \"ENGR101\", \"PHYS101\"]", "courses_meta.json": "{\n \"ENME315\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENME314\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENME313\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENME311\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENME307\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENME303\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENME302\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENME301\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"EMTH271\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENME221\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENME215\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"EMTH210\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENME207\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENME203\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENME202\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENME201\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"COSC131\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"EMTH119\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"EMTH118\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"CHEM111\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENGR102\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"ENGR101\": {\n  \"points\": 15,\n  \"eng\": true\n },\n \"PHYS101\": {\n  \"points\": 15,\n  \"eng\": true\n }\n}"};
+
+const CRC_T=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+const crc32=b=>{let c=~0;for(let i=0;i<b.length;i++)c=CRC_T[(c^b[i])&255]^(c>>>8);return ~c>>>0};
+function makeZip(entries){
+  const enc=new TextEncoder(),parts=[],cd=[];let off=0;
+  for(const [name,text] of entries){
+    const n=enc.encode(name),d=enc.encode(text),crc=crc32(d);
+    const h=new DataView(new ArrayBuffer(30));
+    h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint16(6,0x0800,true);h.setUint16(8,0,true);
+    h.setUint16(10,0,true);h.setUint16(12,0x21,true);h.setUint32(14,crc,true);h.setUint32(18,d.length,true);h.setUint32(22,d.length,true);
+    h.setUint16(26,n.length,true);h.setUint16(28,0,true);
+    parts.push(new Uint8Array(h.buffer),n,d);
+    const c=new DataView(new ArrayBuffer(46));
+    c.setUint32(0,0x02014b50,true);c.setUint16(4,20,true);c.setUint16(6,20,true);c.setUint16(8,0x0800,true);c.setUint16(10,0,true);
+    c.setUint16(12,0,true);c.setUint16(14,0x21,true);c.setUint32(16,crc,true);c.setUint32(20,d.length,true);c.setUint32(24,d.length,true);
+    c.setUint16(28,n.length,true);c.setUint32(42,off,true);
+    cd.push(new Uint8Array(c.buffer),n);
+    off+=30+n.length+d.length;
+  }
+  const cdLen=cd.reduce((s,x)=>s+x.length,0);
+  const e=new DataView(new ArrayBuffer(22));
+  e.setUint32(0,0x06054b50,true);e.setUint16(8,entries.length,true);e.setUint16(10,entries.length,true);
+  e.setUint32(12,cdLen,true);e.setUint32(16,off,true);
+  return new Blob([...parts,...cd,new Uint8Array(e.buffer)],{type:"application/zip"});
+}
+function downloadBlankPack(){
+  const entries=Object.entries(BLANK_FILES).sort((a,b)=>a[0].localeCompare(b[0]));
+  const url=URL.createObjectURL(makeZip(entries));
+  const a=document.createElement("a");a.href=url;a.download="GCI-blank-courses.zip";document.body.append(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);
+  toast("Downloaded "+entries.length+" blank files");
+}
 function toast(msg){const t=document.createElement("div");t.className="toast";t.textContent=msg;document.body.append(t);setTimeout(()=>t.remove(),2200);}
 
 /* ---------- loading ---------- */
@@ -488,7 +508,7 @@ function renderHome(){
     </div>`;
   }).join("");
   app.innerHTML=`<div class="home-head"><div><div class="eyebrow">Grade calculator</div><h1>Courses</h1></div><div class="spacer"></div>
-    <button class="btn" id="importBtn">${I.up}Import CSV</button><button class="btn primary" id="toSummary">View summary</button></div>
+    <button class="btn" id="folderBtn" title="Save your marks to a folder on this computer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM12 10v6M9 13h6"/></svg>Add folder</button><button class="btn" id="blankBtn" title="Blank CSVs for every course plus the config files"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Blank CSVs</button><button class="btn" id="importBtn">${I.up}Import CSV</button><button class="btn primary" id="toSummary">View summary</button></div>
     <div class="grid">${cards}<button class="card add-card" id="addCourse">${I.plus} Add course</button></div>`;
   $("#addCourse").onclick=async()=>{
     const name=await askText("Add course","Course code or name","New Course");
@@ -496,6 +516,8 @@ function renderHome(){
     if(S.courses.includes(name)) return toast(`${name} is already in the list`);
     S.courses.push(name); S.courses.sort(byNumber); await loadCourse(name); saveConfig(); renderHome();
   };
+  $("#folderBtn").onclick=()=>{ if(!FS_OK) return toast("Folder access needs Chrome or Edge on a computer"); pickFolder(); };
+  $("#blankBtn").onclick=downloadBlankPack;
   $("#importBtn").onclick=()=>$("#importInput").click();
   $("#toSummary").onclick=()=>go("summary");
   app.querySelectorAll(".card[data-i]").forEach(el=>{
