@@ -228,7 +228,7 @@ table.mini td,table.mini th{padding:6px 10px}
 </div></header>
 <main id="app"></main>
 
-<input type="file" id="importInput" accept=".csv" multiple hidden>
+<input type="file" id="importInput" accept=".csv,.zip,text/csv,application/zip" multiple hidden>
 
 <script>
 "use strict";
@@ -455,6 +455,35 @@ function downloadBlankPack(){
   setTimeout(()=>URL.revokeObjectURL(url),4000);
   toast("Downloaded "+entries.length+" blank files");
 }
+
+/* ============ Export all / import zip (move your marks between devices) ============ */
+async function readZip(buf){
+  const dv=new DataView(buf),u8=new Uint8Array(buf);let e=-1;
+  for(let i=u8.length-22;i>=Math.max(0,u8.length-65558);i--){ if(dv.getUint32(i,true)===0x06054b50){e=i;break;} }
+  if(e<0) throw new Error("Not a zip file");
+  const n=dv.getUint16(e+10,true); let p=dv.getUint32(e+16,true); const out=[]; const dec=new TextDecoder();
+  for(let k=0;k<n;k++){
+    const method=dv.getUint16(p+10,true),csz=dv.getUint32(p+20,true),nl=dv.getUint16(p+28,true),xl=dv.getUint16(p+30,true),cl=dv.getUint16(p+32,true),lo=dv.getUint32(p+42,true);
+    const name=dec.decode(u8.subarray(p+46,p+46+nl)); p+=46+nl+xl+cl;
+    if(name.endsWith("/")) continue;
+    const ds=lo+30+dv.getUint16(lo+26,true)+dv.getUint16(lo+28,true); const raw=u8.subarray(ds,ds+csz); let data;
+    if(method===0) data=raw;
+    else if(method===8){ const s=new Blob([raw]).stream().pipeThrough(new DecompressionStream("deflate-raw")); data=new Uint8Array(await new Response(s).arrayBuffer()); }
+    else continue;
+    out.push([name,dec.decode(data)]);
+  }
+  return out;
+}
+function exportAll(){
+  const entries=[];
+  for(const n of S.courses){ const c=S.data[n]; if(c&&c.rows.length) entries.push([fileFor(n),courseToCSV(c)]); }
+  entries.push(["courses_config.json",JSON.stringify(S.courses)]);
+  entries.push(["courses_meta.json",JSON.stringify(S.meta,null,1)]);
+  const url=URL.createObjectURL(makeZip(entries));
+  const a=document.createElement("a");a.href=url;a.download="GCI-all-courses.zip";document.body.append(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);
+  toast("Exported "+(entries.length-2)+" courses");
+}
 function toast(msg){const t=document.createElement("div");t.className="toast";t.textContent=msg;document.body.append(t);setTimeout(()=>t.remove(),2200);}
 
 /* ---------- loading ---------- */
@@ -508,7 +537,7 @@ function renderHome(){
     </div>`;
   }).join("");
   app.innerHTML=`<div class="home-head"><div><div class="eyebrow">Grade calculator</div><h1>Courses</h1></div><div class="spacer"></div>
-    <button class="btn" id="folderBtn" title="Save your marks to a folder on this computer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM12 10v6M9 13h6"/></svg>Add folder</button><button class="btn" id="blankBtn" title="Blank CSVs for every course plus the config files"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Blank CSVs</button><button class="btn" id="importBtn">${I.up}Import CSV</button><button class="btn primary" id="toSummary">View summary</button></div>
+    <button class="btn" id="folderBtn" title="Save your marks to a folder on this computer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM12 10v6M9 13h6"/></svg>Add folder</button><button class="btn" id="exportAllBtn" title="Download all your courses and marks as one zip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Export all</button><button class="btn" id="blankBtn" title="Blank CSVs for every course plus the config files"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Blank CSVs</button><button class="btn" id="importBtn">${I.up}Import CSV</button><button class="btn primary" id="toSummary">View summary</button></div>
     <div class="grid">${cards}<button class="card add-card" id="addCourse">${I.plus} Add course</button></div>`;
   $("#addCourse").onclick=async()=>{
     const name=await askText("Add course","Course code or name","New Course");
@@ -516,7 +545,8 @@ function renderHome(){
     if(S.courses.includes(name)) return toast(`${name} is already in the list`);
     S.courses.push(name); S.courses.sort(byNumber); await loadCourse(name); saveConfig(); renderHome();
   };
-  $("#folderBtn").onclick=()=>{ if(!FS_OK) return toast("Folder access needs Chrome or Edge on a computer"); pickFolder(); };
+  $("#folderBtn").onclick=()=>{ if(!FS_OK) return toast("Folders aren't supported on iPhone. Use Export all on your computer, then Import on your phone."); pickFolder(); };
+  $("#exportAllBtn").onclick=exportAll;
   $("#blankBtn").onclick=downloadBlankPack;
   $("#importBtn").onclick=()=>$("#importInput").click();
   $("#toSummary").onclick=()=>go("summary");
@@ -854,14 +884,29 @@ function download(name,text){
   document.body.append(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);
 }
 $("#importInput").onchange=async e=>{
-  for(const f of e.target.files){
-    const name=f.name.replace(/\.csv$/i,"");
-    const text=await f.text();
-    S.data[name]=courseFromCSV(name,text);
-    if(!S.courses.includes(name)){ S.courses.push(name); S.courses.sort(byNumber); }
-    await store.writeText(fileFor(name),text);
-  }
-  e.target.value=""; saveConfig(); toast("Imported"); go("home");
+  try{
+    const items=[];
+    for(const f of e.target.files){
+      if(/\.zip$/i.test(f.name)) items.push(...await readZip(await f.arrayBuffer()));
+      else items.push([f.name,await f.text()]);
+    }
+    let count=0;
+    for(const [path,text] of items){
+      const base=path.split("/").pop();
+      if(base.startsWith("._")||path.includes("__MACOSX")) continue;
+      if(/^courses_meta\.json$/i.test(base)){
+        try{ Object.assign(S.meta,JSON.parse(text)); saveMeta(); }catch{}
+        continue;
+      }
+      if(!/\.csv$/i.test(base)) continue;
+      const name=base.replace(/\.csv$/i,"");
+      S.data[name]=courseFromCSV(name,text);
+      if(!S.courses.includes(name)){ S.courses.push(name); S.courses.sort(byNumber); }
+      await store.writeText(fileFor(name),text); count++;
+    }
+    saveConfig(); toast("Imported "+count+" course"+(count===1?"":"s"));
+  }catch(err){ toast("Couldn't import: "+err.message); }
+  e.target.value=""; go("home");
 };
 
 /* ============ Storage selection ============ */
